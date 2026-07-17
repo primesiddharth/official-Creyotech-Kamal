@@ -30,6 +30,7 @@ function JobFilters({
     dark:border-white/10
     dark:bg-secondary
   "
+      id="open-positions"
     >
       <div className="grid gap-4 lg:grid-cols-4">
         <div className="relative">

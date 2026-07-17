@@ -40,7 +40,7 @@ function FAQ() {
     py-15
     sm:px-8
     lg:px-16
-    xl:px-40
+    xl:px-20
   "
     >
       {/* Background Glow */}

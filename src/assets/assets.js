@@ -91,10 +91,11 @@ import gallery8 from "./gallery/gallery8.webp";
 import gallery9 from "./gallery/gallery9.webp";
 import gallery10 from "./gallery/gallery10.webp";
 import heroVideo from "./Home/digital-agency-kolkata-hero-v03.webm";
-import webapp from "./services/web-development.jpg";
-import digitalmarketing from "./services/digital-marketing.jpg";
-import socialmedia from "./services/social-media-marketing.jpg";
-import supportAgent from "./support.jpg";
+import webapp from "./services/web-development.webp";
+import digitalmarketing from "./services/digital-marketing.webp";
+import socialmedia from "./services/social-media-marketing.webp";
+import supportAgent from "./support.webp";
+import GreatPlaceToWork from "../assets/great-place-to-work.webp";
 
 export const service_images = {
   webapp,
@@ -156,6 +157,7 @@ export const cust_reviews = [
 export const timeLine = [tl1, tl2, tl3, tl4];
 
 const assets = {
+  GreatPlaceToWork,
   supportAgent,
   heroVideo,
   tl1,

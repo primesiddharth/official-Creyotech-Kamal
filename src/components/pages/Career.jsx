@@ -7,6 +7,8 @@ import EmptyState from "../career/EmptyState";
 
 import { jobs } from "../../data/jobs";
 import FAQ from "../home/FAQ";
+import WhyJoinCreyotech from "../career/WhyJoinCreyotech";
+import AnimatedGallery from "../about/AnimatedGallery";
 
 export default function Career() {
   const [search, setSearch] = useState("");
@@ -55,7 +57,7 @@ export default function Career() {
         <CareerHero />
       </motion.div>
 
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 pt-10">
         <JobFilters
           search={search}
           setSearch={setSearch}
@@ -76,10 +78,12 @@ export default function Career() {
             <EmptyState />
           )}
         </div>
-        <div className="border-t border-slate-200">
-          <FAQ />
-        </div>
       </section>
+      <WhyJoinCreyotech />
+      <AnimatedGallery />
+      <div className="border-t border-slate-200">
+        <FAQ />
+      </div>
     </main>
   );
 }

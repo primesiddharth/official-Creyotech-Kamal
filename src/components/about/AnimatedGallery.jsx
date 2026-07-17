@@ -17,7 +17,7 @@ function AnimatedGallery() {
       className="
         relative
         overflow-hidden
-        py-24
+        py-10
       "
     >
       {/* Background Glow */}

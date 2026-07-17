@@ -11,7 +11,6 @@ import JourneyHero from "../about/JourneyHero";
 import StatsSection from "../about/StatsSection";
 import AnimatedGallery from "../about/AnimatedGallery";
 import FAQ from "../home/FAQ";
-import CreyotechMethod from "../about/CreyotechMethod";
 import CredentialsSection from "../about/CredentialsSection";
 import CreyoMethod from "../about/CreyoMethod";
 
@@ -22,7 +21,6 @@ function AboutUs() {
       <AboutStorySection />
       <StatsSection />
       <CareerOpportunities />
-      <CreyotechMethod/>
       <CreyoMethod/>
       <GovernmentRecognition />
       <CredentialsSection/>

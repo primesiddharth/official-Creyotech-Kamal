@@ -1,4 +1,10 @@
-import { ArrowLeft, BriefcaseBusiness, Building2, Clock3, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  BriefcaseBusiness,
+  Building2,
+  Clock3,
+  Sparkles,
+} from "lucide-react";
 import JobApply from "./JobApply";
 
 function JobAbout({ job }) {
@@ -51,20 +57,19 @@ function JobAbout({ job }) {
     <section className="py-12 md:py-10 ">
       <div className="mx-auto max-w-7xl px-0">
         <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr] xl:items-start">
-          
           <div className="max-h-full overflow-y-auto bg-white/90 p-6 rounded-2xl  dark:border-white/10 dark:bg-secondary md:p-8">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="flex flex-col">
-                                      <a
-            href="/career"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-6 group"
-          >
-            <ArrowLeft
-              size={16}
-              className="transition-transform group-hover:-translate-x-1"
-            />
-            Back to Careers
-          </a>
+                <a
+                  href="/career"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-6 group"
+                >
+                  <ArrowLeft
+                    size={16}
+                    className="transition-transform group-hover:-translate-x-1"
+                  />
+                  Back to Careers
+                </a>
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:bg-primary/20">
                   <BriefcaseBusiness size={24} />
                 </div>
@@ -72,7 +77,8 @@ function JobAbout({ job }) {
                   {job?.title || "Role Overview"}
                 </h2>
                 <p className="mt-2 text-sm text-text-secondary dark:text-text-light/70">
-                  A polished overview of the role, expectations, tools, and growth opportunity.
+                  A polished overview of the role, expectations, tools, and
+                  growth opportunity.
                 </p>
               </div>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700 dark:border-emerald-900/40 dark:bg-emerald-950/30 dark:text-emerald-300">
@@ -151,7 +157,8 @@ function JobAbout({ job }) {
             </div>
 
             <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm text-text-secondary dark:border-primary/20 dark:bg-primary/10 dark:text-text-light/80">
-              Ready to apply? Fill the form on the right and share your details with us.
+              Ready to apply? Fill the form on the right and share your details
+              with us.
             </div>
 
             <div className="mt-4 flex flex-wrap gap-3 rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-sm dark:border-white/10 dark:bg-zinc-900/40">
