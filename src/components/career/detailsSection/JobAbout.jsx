@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Building2, Clock3, Sparkles } from "lucide-react";
+import { ArrowLeft, BriefcaseBusiness, Building2, Clock3, Sparkles } from "lucide-react";
 import JobApply from "./JobApply";
 
 function JobAbout({ job }) {
@@ -51,9 +51,20 @@ function JobAbout({ job }) {
     <section className="py-12 md:py-10 ">
       <div className="mx-auto max-w-7xl px-0">
         <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr] xl:items-start">
+          
           <div className="max-h-full overflow-y-auto bg-white/90 p-6 rounded-2xl  dark:border-white/10 dark:bg-secondary md:p-8">
             <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
+              <div className="flex flex-col">
+                                      <a
+            href="/career"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-6 group"
+          >
+            <ArrowLeft
+              size={16}
+              className="transition-transform group-hover:-translate-x-1"
+            />
+            Back to Careers
+          </a>
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:bg-primary/20">
                   <BriefcaseBusiness size={24} />
                 </div>
@@ -100,14 +111,14 @@ function JobAbout({ job }) {
                     </div>
 
                     {section.content ? (
-                      <p className="mt-3 whitespace-pre-line text-sm leading-7 text-text-secondary dark:text-text-light/80">
+                      <p className="mt-3 whitespace-pre-line text-sm font-medium leading-6 text-text-secondary dark:text-text-light/80">
                         {section.content}
                       </p>
                     ) : null}
 
                     {section.items ? (
                       <ul
-                        className={`mt-4 text-sm leading-7 text-text-secondary dark:text-text-light/80 ${
+                        className={`mt-4 text-sm font-medium leading-6 text-text-secondary dark:text-text-light/80 ${
                           section.title === "Tech stack"
                             ? "flex flex-wrap gap-2"
                             : "space-y-2"
