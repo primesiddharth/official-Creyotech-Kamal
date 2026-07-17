@@ -9,166 +9,60 @@ function Teams() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      transition={{ staggerChildren: 0.2 }}
-      className="flex flex-col items-center text-center gap-7 px-8 sm:px-12 lg:px-24 xl:px-40 pt-30 text-text-primary dark:text-text-light"
+      transition={{ staggerChildren: 0.12 }}
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-text-primary dark:text-text-light"
     >
-      <Title
-        title="Meet The Leadership Team"
-        desc="A passionate team of digital experts dedicated to your brands success."
-      />
+      {/* Title Section with balanced spacing */}
+      <div className="mb-10 items-center flex flex-col gap-2">
+        <Title
+          title="Meet The Leadership Team"
+          desc="A passionate team of digital experts dedicated to your brand's success."
+        />
+      </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         {teamData.map((team, index) => (
           <motion.div
+            key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.08 }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
             viewport={{ once: true }}
-            whileHover={{ y: -5 }}
-            key={index}
-            className="
-        group
-        relative
-        overflow-hidden
-        rounded-[1.8rem]
-        border
-        border-primary/10
-        bg-white/70
-        p-5
-        shadow-[0_15px_40px_rgba(0,0,0,0.05)]
-        backdrop-blur-xl
-        transition-all
-        duration-300
-        hover:border-primary/20
-        hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-        dark:border-white/10
-        dark:bg-white/[0.03]
-      "
+            whileHover={{ y: -4 }}
+            className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-white/60 p-5 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-primary/20 hover:shadow-xl dark:border-white/5 dark:bg-white/[0.02]"
           >
-            {/* Hover Glow */}
-            <div
-              className="
-          absolute
-          right-0
-          top-0
-          h-28
-          w-28
-          rounded-full
-          bg-primary/10
-          blur-3xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-100
-        "
-            />
+            <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-primary/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-            {/* Content */}
-            <div className="relative z-10">
-              {/* Top */}
-              <div
-                className="
-            flex
-            items-center
-            gap-4
-          "
-              >
-                {/* Image */}
+            <div className="relative z-10 flex flex-col sm:flex-row gap-5 items-start h-full">
+              {/* Profile Picture */}
+              <div className="w-full sm:w-36 h-44 sm:h-40 shrink-0 overflow-hidden rounded-xl ring-4 ring-primary/5 dark:ring-white/5">
                 <img
                   src={team.image}
                   loading="lazy"
                   decoding="async"
-                  className="
-              h-28
-              w-28
-              shrink-0
-              rounded-2xl
-              object-cover
-              object-top
-              ring-2
-              ring-primary/10
-            "
                   alt={team.name}
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
-
-                {/* Name + Role */}
-                <div
-                  className="flex
-    flex-1
-    flex-col
-    items-start
-    text-left"
-                >
-                  <h3
-                    className="
-                 text-lg
-      font-bold
-      leading-tight
-      text-left
-      text-text-primary
-      dark:text-white
-              "
-                  >
-                    {team.name}
-                  </h3>
-
-                  <p
-                    className="
-               mt-1
-      text-left
-      text-sm
-      font-medium
-      text-primary
-              "
-                  >
-                    {team.title}
-                  </p>
-                </div>
               </div>
 
-              {/* Divider */}
-              <div
-                className="
-            my-5
-            h-px
-            w-full
-            bg-gradient-to-r
-            from-transparent
-            via-primary/15
-            to-transparent
-          "
-              />
+              {/* Text Area: Flex-grow instantly fills horizontal footprint */}
+              <div className="flex-1 flex flex-col justify-between h-full text-left pt-1">
+                <div>
+                  <h3 className="text-xl font-bold tracking-tight text-text-primary dark:text-white leading-snug">
+                    {team.name}
+                  </h3>
+                  <p className="text-sm font-semibold tracking-wide text-primary uppercase mt-0.5">
+                    {team.title}
+                  </p>
 
-              {/* Description */}
-              <p
-                className="
-            text-sm
-            leading-5
-            text-text-secondary
-            dark:text-white/70
-          "
-              >
-                {team.desc}
-              </p>
-            </div>
+                  {/* Subtle, sleek minimal divider accent */}
+                  <div className="mt-3 mb-2.5 h-0.5 w-8 rounded-full bg-primary/30" />
+                </div>
 
-            {/* Floating Number */}
-            <div
-              className="
-          absolute
-          top-3
-          right-4
-          text-4xl
-          font-bold
-          leading-none
-          text-primary/5
-          transition-all
-          duration-300
-          group-hover:scale-110
-          dark:text-white/[0.03]
-        "
-            >
-              {(index + 1).toString().padStart(2, "0")}
+                <p className="text-sm leading-relaxed text-text-secondary dark:text-white/70 line-clamp-4">
+                  {team.desc}
+                </p>
+              </div>
             </div>
           </motion.div>
         ))}
