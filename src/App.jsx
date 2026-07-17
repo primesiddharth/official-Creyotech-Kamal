@@ -14,6 +14,10 @@ import ChatWidget from "./components/chatbot/ChatWidget";
 import MiscellaneousServices from "./components/pages/services/MiscellaneousServices";
 import ScrollToHash from "./components/ScrollToHash";
 import JobDetails from "./components/career/JobDetails";
+import PrivacyPolicyy from "./components/pages/PrivacyPolicyy";
+import RefundPolicy from "./components/pages/RefundPolicy";
+import TermsOfService from "./components/pages/TermsOfService";
+import ProjectDeliveryPolicy from "./components/pages/ProjectDeliveryPolicy";
 
 function App() {
   return (
@@ -45,6 +49,13 @@ function App() {
           <Route
             path="/services/miscellaneous-services"
             element={<MiscellaneousServices />}
+          />
+          <Route path="/privacy-policy" element={<PrivacyPolicyy />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route
+            path="/project-delivery-policy"
+            element={<ProjectDeliveryPolicy />}
           />
         </Route>
       </Routes>
