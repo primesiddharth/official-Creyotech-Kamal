@@ -15,11 +15,6 @@ class ContactRequest(BaseModel):
         max_length=150,
     )
 
-    phone_number: str = Field(
-        min_length=8,
-        max_length=20,
-    )
-
     email: EmailStr
 
     business_type: str = Field(

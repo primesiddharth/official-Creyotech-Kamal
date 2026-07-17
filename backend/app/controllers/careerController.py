@@ -10,7 +10,6 @@ class CareerController:
     async def submit_career_form(
         self,
         name: str,
-        phone_number: str,
         whatsapp_number: str,
         email: str,
         position: str,
@@ -22,7 +21,6 @@ class CareerController:
 
         return await careerService.submit_career_form(
             name,
-            phone_number,
             whatsapp_number,
             email,
             position,

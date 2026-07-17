@@ -26,7 +26,7 @@ function CareerHero() {
             {/* Tagline Badge */}
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wide text-indigo-200 backdrop-blur-md">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-              We're Hiring!
+              We&apos;re Hiring!
             </span>
 
             {/* Headline */}

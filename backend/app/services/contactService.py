@@ -32,7 +32,6 @@ class ContactService:
             {
                 "name": request.name,
                 "company_name": request.company_name,
-                "phone_number": request.phone_number,
                 "email": request.email,
                 "business_type": request.business_type,
                 "problem_faced": request.problem_faced,

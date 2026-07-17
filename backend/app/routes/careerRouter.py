@@ -18,8 +18,6 @@ async def submit_career_form(
 
     name: str = Form(...),
 
-    phone_number: str = Form(...),
-
     whatsapp_number: str = Form(...),
 
     email: str = Form(...),
@@ -38,11 +36,10 @@ async def submit_career_form(
 
     return await careerController.submit_career_form(
         name,
-        phone_number,
         whatsapp_number,
         email,
         position,
-        recaptcha_token,   # ✅ Missing tha
+        recaptcha_token,
         resume,
         address_proof,
         marksheet,

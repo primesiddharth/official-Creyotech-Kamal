@@ -48,7 +48,6 @@ class CareerService:
     async def submit_career_form(
         self,
         name: str,
-        phone_number: str,
         whatsapp_number: str,
         email: str,
         position: str,
@@ -93,7 +92,6 @@ class CareerService:
             "career_email.html",
             {
                 "name": name,
-                "phone_number": phone_number,
                 "whatsapp_number": whatsapp_number,
                 "email": email,
                 "position": position,
