@@ -1,33 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Contact Form</title>
-</head>
+  </head>
 
-<body style="font-family: Arial, sans-serif;">
-
+  <body style="font-family: Arial, sans-serif">
     <h2>New Contact Form Submission</h2>
 
-    <hr>
+    <hr />
 
     <p><strong>Name:</strong> {{ name }}</p>
 
-    <p><strong>Company Name:</strong> {{ company_name }}</p>
-
     <p><strong>Email:</strong> {{ email }}</p>
 
-    <p><strong>Business Type:</strong> {{ business_type }}</p>
+    <p><strong>WhatsApp Number:</strong> {{ whatsapp_number }}</p>
 
-    <p><strong>Problem Faced:</strong></p>
+    <p><strong>Service Required:</strong> {{ solution_required }}</p>
 
+    <p><strong>Project Details:</strong></p>
     <p>{{ problem_faced }}</p>
-
-    <p><strong>Solution Required:</strong></p>
-
-    <p>{{ solution_required }}</p>
-
-</body>
-
+  </body>
 </html>

@@ -10,16 +10,11 @@ class ContactRequest(BaseModel):
         max_length=100,
     )
 
-    company_name: str = Field(
-        min_length=2,
-        max_length=150,
-    )
-
     email: EmailStr
 
-    business_type: str = Field(
-        min_length=2,
-        max_length=100,
+    whatsapp_number: str = Field(
+        min_length=10,
+        max_length=20,
     )
 
     problem_faced: str = Field(
@@ -35,7 +30,6 @@ class ContactRequest(BaseModel):
         "Social Media Marketing",
     ]
 
-    recaptcha_token: str
 
 
 class ContactResponse(BaseModel):

@@ -10,6 +10,7 @@ import { HiOutlineBriefcase } from "react-icons/hi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import ServiceCarousel from "./home/ServiceCarousel";
+import { submitContactForm } from "../services/contactService";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -32,24 +33,19 @@ function ContactForm() {
 
     const toastId = toast.loading("Sending...");
 
-    const form = new FormData();
-
-    form.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
-
-    form.append("name", formData.name);
-    form.append("email", formData.email);
-    form.append("message", formData.message);
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: form,
-      });
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        whatsapp_number: formData.phone,
+        problem_faced: formData.message,
+        solution_required: formData.service,
+      };
 
-      const data = await response.json();
+      const data = await submitContactForm(payload);
 
       if (data.success) {
-        toast.success("Message sent successfully!", {
+        toast.success(data.message || "Message sent successfully!", {
           id: toastId,
         });
 
@@ -57,14 +53,12 @@ function ContactForm() {
           name: "",
           email: "",
           message: "",
-        });
-      } else {
-        toast.error(data.message || "Something went wrong", {
-          id: toastId,
+          phone: "",
+          service: "",
         });
       }
     } catch (error) {
-      toast.error(error.message || "Failed to send message", {
+      toast.error(error.message || "Failed to send message.", {
         id: toastId,
       });
     }
@@ -121,7 +115,7 @@ function ContactForm() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Doe"
+                      placeholder="Rajesh Sharma"
                       required
                       className="w-full bg-transparent py-3 outline-none dark:text-secondary"
                     />
@@ -143,7 +137,7 @@ function ContactForm() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="john@example.com"
+                        placeholder="RajeshSharma@gmail.com"
                         required
                         className="w-full bg-transparent py-3 outline-none dark:text-secondary"
                       />
@@ -152,7 +146,7 @@ function ContactForm() {
 
                   <div>
                     <label className="mb-2 block text-sm font-medium">
-                      Phone Number
+                      WhatsApp Number
                     </label>
 
                     <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-bg-soft px-4 transition-all focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10">
@@ -164,6 +158,7 @@ function ContactForm() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 9876543210"
+                        required
                         className="w-full bg-transparent py-3 outline-none dark:text-secondary"
                       />
                     </div>
@@ -183,13 +178,25 @@ function ContactForm() {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
+                      required
                       className="w-full bg-transparent py-3 outline-none dark:text-secondary"
                     >
                       <option value="">Select a Service</option>
-                      <option>Website Development</option>
-                      <option>Mobile App Development</option>
-                      <option>Digital Marketing</option>
-                      <option>Social Media Marketing</option>
+                      <option value="Website Development">
+                        Website Development
+                      </option>
+                      <option value="Web / Cloud Application">
+                        Web / Cloud Application
+                      </option>
+                      <option value="Mobile Application">
+                        Mobile Application
+                      </option>
+                      <option value="Digital Marketing">
+                        Digital Marketing
+                      </option>
+                      <option value="Social Media Marketing">
+                        Social Media Marketing
+                      </option>
                     </select>
                   </div>
                 </div>

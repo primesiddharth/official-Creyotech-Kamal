@@ -22,21 +22,20 @@ class ContactService:
         logger.info("Contact form request received.")
 
         # Step 1: Verify the Google reCAPTCHA token
-        await recaptchaService.verify_token(
-            request.recaptcha_token,
-        )
+        # await recaptchaService.verify_token(
+        #     request.recaptcha_token,
+        # )
 
         # Step 2: Render the HTML email template
         html_body = templateService.render(
-            "contact_email.html",
-            {
-                "name": request.name,
-                "company_name": request.company_name,
-                "email": request.email,
-                "business_type": request.business_type,
-                "problem_faced": request.problem_faced,
-                "solution_required": request.solution_required,
-            },
+           "contact_email.html",
+           {
+               "name": request.name,
+               "email": request.email,
+               "whatsapp_number": request.whatsapp_number,
+               "problem_faced": request.problem_faced,
+               "solution_required": request.solution_required,
+           },
         )
 
         # Step 3: Send the email using Gmail API

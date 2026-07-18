@@ -1,54 +1,40 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-
-const services = [
-  "Website Development",
-  "SEO & GEO",
-  "Digital Marketing",
-  "Social Media Marketing",
-  "Mobile App Development",
-];
+import { submitContactForm } from "../../services/contactService";
 
 function ContactForm() {
-  const [selectedServices, setSelectedServices] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "",
+    service: "",
     message: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  const toggleService = (service) => {
-    setSelectedServices((prev) =>
-      prev.includes(service)
-        ? prev.filter((item) => item !== service)
-        : [...prev, service],
-    );
-  };
-
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
 
     setErrors((prev) => ({
       ...prev,
-      [e.target.name]: "",
+      [name]: "",
     }));
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim())
-      newErrors.firstName = "First name is required";
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+    }
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
@@ -56,10 +42,17 @@ function ContactForm() {
       newErrors.email = "Enter a valid email";
     }
 
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "WhatsApp number is required";
+    }
 
-    if (selectedServices.length === 0)
-      newErrors.services = "Select at least one service";
+    if (!formData.service) {
+      newErrors.service = "Please select a service";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Project details are required";
+    }
 
     setErrors(newErrors);
 
@@ -74,404 +67,250 @@ function ContactForm() {
       return;
     }
 
+    const toastId = toast.loading("Submitting inquiry...");
+
     try {
       setLoading(true);
 
-      // API / EmailJS call here
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        whatsapp_number: formData.phone,
+        problem_faced: formData.message,
+        solution_required: formData.service,
+      };
 
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const data = await submitContactForm(payload);
 
-      toast.success("Inquiry submitted successfully!");
+      if (data.success) {
+        toast.success(data.message || "Inquiry submitted successfully!", {
+          id: toastId,
+        });
 
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+
+        setErrors({});
+      }
+    } catch (error) {
+      toast.error(error.message || "Something went wrong. Please try again.", {
+        id: toastId,
       });
-
-      setSelectedServices([]);
-    } catch {
-      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="
-       py-10 px-5 lg:px-25
-        bg-bg-light
-        dark:bg-bg-dark
-      "
-    >
-      <div className="mx-auto max-w-6xl">
-        {/* Intro Content */}
-        <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span
-            className="
-      inline-flex
-      rounded-full
-      bg-primary/10
-      px-4
-      py-2
-      text-sm
-      font-medium
-      text-primary
-    "
-          >
-            Let&apos;s Start a Conversation
-          </span>
+    <div className="mx-auto max-w-7xl px-4 py-12">
+      <div className="grid gap-8 md:grid-cols-12 items-start">
+        {/* Left Side: Form Section */}
+        <div className="md:col-span-7 bg-white dark:bg-secondary p-6 sm:p-8 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+              Let's build something together
+            </h2>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+              Fill out the form below and our team will get back to you shortly.
+            </p>
+          </div>
 
-          <h2
-            className="
-      mt-4
-      text-3xl
-      font-bold
-      leading-tight
-      dark:text-text-light
-      md:text-4xl
-    "
-          >
-            Let&apos;s Find the Right Solution for Your Business
-          </h2>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Full Name */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Rahul Sharma"
+                className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
+              />
+              {errors.name && (
+                <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
+                  {errors.name}
+                </p>
+              )}
+            </div>
 
-          <p
-            className="
-      mx-auto
-      mt-5
-      max-w-3xl
-      text-base
-      leading-relaxed
-      text-text-secondary
-      md:text-lg
-    "
-          >
-            Whether you need quick guidance or a detailed consultation,
-            We&apos;re here to support you. Every business challenge can be
-            addressed with a budget-friendly approach or an optimized, long-term
-            solution. We help you evaluate both, clearly and transparently.
-          </p>
+            {/* Email + WhatsApp Row */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {/* Email */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
+                />
+                {errors.email && (
+                  <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
+                    {errors.email}
+                  </p>
+                )}
+              </div>
 
-          <p
-            className="
-      mt-4
-      font-medium
-      text-primary
-    "
-          >
-            Don&apos;t hesitate to get in touch.
-          </p>
-        </div>
+              {/* WhatsApp */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                  WhatsApp Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+91 XXXXX XXXXX"
+                  className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
+                />
+                {errors.phone && (
+                  <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
+                    {errors.phone}
+                  </p>
+                )}
+              </div>
+            </div>
 
-        {/* Trust Assurances */}
-        <div className="mb-16 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-          {[
-            "NDA Available on Request",
-            "Dedicated Product Specialists",
-            "Multiple Solution Quotations",
-            "Milestone-Based Billing",
-            "Up to Full Refund Assurance",
-          ].map((item) => (
-            <div
-              key={item}
-              className="
-        rounded-2xl
-        border
-        border-primary/10
-        bg-white
-        p-4
-        text-center
-        shadow-sm
-        transition-all
-        hover:border-primary/20
-        hover:shadow-md
-        dark:border-border-dark
-        dark:bg-secondary
-      "
-            >
-              <div
-                className="
-          mx-auto
-          mb-3
-          flex
-          h-10
-          w-10
-          items-center
-          justify-center
-          rounded-full
-          bg-primary/10
-          text-primary
-        "
+            {/* Service */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Select Service <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
               >
-                ✓
-              </div>
-
-              <p className="text-sm font-medium dark:text-text-light">{item}</p>
+                <option value="">Choose an option</option>
+                <option value="Website Development">Website Development</option>
+                <option value="Web / Cloud Application">
+                  Web / Cloud Application
+                </option>
+                <option value="Mobile Application">Mobile Application</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Social Media Marketing">
+                  Social Media Marketing
+                </option>
+              </select>
+              {errors.service && (
+                <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
+                  {errors.service}
+                </p>
+              )}
             </div>
-          ))}
+
+            {/* Project Details */}
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                Project Details <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                rows={4}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Tell us about your project features, target audience, and timelines..."
+                className="min-h-[110px] w-full rounded-xl border border-border-light bg-bg-soft px-4 py-3 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
+              />
+              {errors.message && (
+                <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
+                  {errors.message}
+                </p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex h-12 w-full items-center justify-center rounded-xl bg-primary py-3.5 font-semibold text-white transition-all hover:opacity-95 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  Submitting...
+                </span>
+              ) : (
+                "Submit Inquiry"
+              )}
+            </button>
+          </form>
         </div>
 
-        <div
-          className="
-            overflow-hidden
-            rounded-[24px]
-            border
-            border-border-light
-            bg-white
-            shadow-xl
-            dark:border-border-dark
-            dark:bg-secondary
-          "
-        >
-          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-            {/* FORM */}
-            <div className="flex items-center">
-              <div className="w-full p-6 lg:p-8">
-                <h2
-                  className="
-                  mt-4
-                  text-3xl
-                  font-bold
-                  dark:text-text-light
-                "
-                >
-                  Get Expert Advice for Your Business
-                </h2>
+        {/* Right Side: Map & Info Card */}
+        <div className="md:col-span-5 space-y-6 lg:sticky lg:top-6">
+          <div className="bg-zinc-50 dark:bg-secondary p-6 rounded-2xl border border-border-light dark:border-border-dark">
+            <h3 className="font-bold text-zinc-900 dark:text-white text-lg">
+              Our Location
+            </h3>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+              <strong>Creyotech</strong>
+              <br />
+              South Kumrakhali, Sonarpur
+              <br />
+              Kolkata, West Bengal — 700103
+            </p>
+          </div>
 
-                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-                  {/* Names */}
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <input
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="First Name *"
-                        className="
-  h-12
-  w-full
-  rounded-xl
-  border
-  border-border-light
-  bg-bg-soft
-  px-4
-  text-sm
-  outline-none
-  transition-all
-  focus:border-primary
-  focus:ring-4
-  focus:ring-primary/10
-"
-                      />
-
-                      {errors.firstName && (
-                        <p className="mt-1 text-xs text-red-500">
-                          {errors.firstName}
-                        </p>
-                      )}
-                    </div>
-
-                    <input
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                      className="
-  h-12
-  w-full
-  rounded-xl
-  border
-  border-border-light
-  bg-bg-soft
-  px-4
-  text-sm
-  outline-none
-  transition-all
-  focus:border-primary
-  focus:ring-4
-  focus:ring-primary/10
-"
-                    />
-                  </div>
-
-                  {/* Email + Phone */}
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email Address *"
-                        className="
-  h-12
-  w-full
-  rounded-xl
-  border
-  border-border-light
-  bg-bg-soft
-  px-4
-  text-sm
-  outline-none
-  transition-all
-  focus:border-primary
-  focus:ring-4
-  focus:ring-primary/10
-"
-                      />
-
-                      {errors.email && (
-                        <p className="mt-1 text-xs text-red-500">
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number *"
-                        className="
-  h-12
-  w-full
-  rounded-xl
-  border
-  border-border-light
-  bg-bg-soft
-  px-4
-  text-sm
-  outline-none
-  transition-all
-  focus:border-primary
-  focus:ring-4
-  focus:ring-primary/10
-"
-                      />
-
-                      {errors.phone && (
-                        <p className="mt-1 text-xs text-red-500">
-                          {errors.phone}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Services */}
-                  <div>
-                    <label className="mb-3 block text-sm font-medium dark:text-text-light">
-                      Services Interested In
-                    </label>
-
-                    <div className="flex flex-wrap gap-2">
-                      {services.map((service) => (
-                        <button
-                          key={service}
-                          type="button"
-                          onClick={() => toggleService(service)}
-                          className={`rounded-xl px-4 py-2 text-sm font-medium transition-all ${
-                            selectedServices.includes(service)
-                              ? "bg-primary text-white"
-                              : "border border-border-light bg-bg-soft hover:border-primary dark:border-border-dark"
-                          }`}
-                        >
-                          {service}
-                        </button>
-                      ))}
-                    </div>
-
-                    {errors.services && (
-                      <p className="mt-2 text-xs text-red-500">
-                        {errors.services}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Message */}
-                  <textarea
-                    rows={4}
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your project..."
-                    className="
-                    w-full
-                    rounded-xl
-                     min-h-[110px]
-                    border
-                    border-border-light
-                    bg-bg-soft
-                    px-4
-                    py-3
-                    outline-none
-                    transition-all
-                    focus:border-primary
-                    focus:ring-4
-                    focus:ring-primary/10
-                    dark:border-border-dark
-                  "
-                  />
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="
-                    flex
-                    h-12
-                    w-full
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-primary
-                    py-3.5
-                    font-medium
-                    text-white
-                    transition-all
-                    hover:scale-[1.01]
-                    disabled:cursor-not-allowed
-                    disabled:opacity-70
-                  "
-                  >
-                    {loading ? "Submitting..." : "Submit Inquiry"}
-                  </button>
-                </form>
-              </div>
-            </div>
-            {/* MAP */}
-            <div className="relative h-full min-h-[420px] overflow-hidden">
-              <iframe
-                title="Creyotech Location"
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3687.573562388398!2d88.4041714!3d22.4450708!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027371380ecbaf%3A0x7d7545f0ecf59042!2sCreyotech!5e0!3m2!1sen!2sin!4v1780757669142!5m2!1sen!2sin"
-                className="absolute inset-0 h-full w-full"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-
-              {/* Optional overlay */}
-              <div
-                className="
-      pointer-events-none
-      absolute
-      inset-0
-      bg-gradient-to-t
-      from-black/10
-      via-transparent
-      to-transparent
-    "
-              />
+          {/* Map Container */}
+          <div className="h-[350px] w-full rounded-2xl overflow-hidden border border-border-light dark:border-border-dark shadow-inner relative group bg-zinc-100 dark:bg-bg-dark">
+            <iframe
+              title="Creyotech Location Map"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              scrolling="no"
+              marginHeight="0"
+              marginWidth="0"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=88.4100%2C22.4350%2C88.4400%2C22.4550&amp;layer=mapnik&amp;marker=22.4452%2C88.4241"
+              className="filter grayscale opacity-90 contrast-125 transition-all group-hover:grayscale-0 group-hover:opacity-100"
+            />
+            <div className="absolute bottom-2 right-2 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xs px-2 py-1 rounded text-[10px] text-zinc-500 dark:text-zinc-400 pointer-events-none">
+              <a
+                href="https://www.openstreetmap.org/?mlat=22.4452&amp;mlon=88.4241#map=16/22.4452/88.4241"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                View Larger Map
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

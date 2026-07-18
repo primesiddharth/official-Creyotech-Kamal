@@ -8,6 +8,7 @@ import {
 } from "react-icons/fi";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import toast from "react-hot-toast";
+import { submitContactForm } from "../services/contactService";
 
 function ProposalForm() {
   const [formData, setFormData] = useState({
@@ -30,24 +31,16 @@ function ProposalForm() {
 
     const toastId = toast.loading("Sending proposal request...");
 
-    const form = new FormData();
-
-    form.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
-    form.append("subject", "New Proposal Request - Creyotech");
-
-    form.append("name", formData.name);
-    form.append("email", formData.email);
-    form.append("phone", formData.phone);
-    form.append("service", formData.service);
-    form.append("message", formData.message);
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: form,
-      });
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        whatsapp_number: formData.phone,
+        problem_faced: formData.message,
+        solution_required: formData.service,
+      };
 
-      const data = await response.json();
+      const data = await submitContactForm(payload);
 
       if (data.success) {
         toast.success("Proposal request submitted!", {
@@ -60,10 +53,6 @@ function ProposalForm() {
           phone: "",
           service: "",
           message: "",
-        });
-      } else {
-        toast.error(data.message || "Something went wrong", {
-          id: toastId,
         });
       }
     } catch (error) {
@@ -99,7 +88,7 @@ function ProposalForm() {
         <InputField
           icon={<FiPhone />}
           name="phone"
-          placeholder="Phone Number"
+          placeholder="WhatsApp Number"
           value={formData.phone}
           onChange={handleChange}
         />
@@ -112,17 +101,32 @@ function ProposalForm() {
             name="service"
             value={formData.service}
             onChange={handleChange}
+            required
             className="w-full bg-transparent py-3 outline-none text-text-primary dark:text-white"
           >
-            <option value="" className="text-text-primary dark:text-white">
+            <option value="" className="text-text-primary">
               Select Service
             </option>
 
-            <option className="text-black">Website Development</option>
-            <option className="text-black">Mobile App Development</option>
-            <option className="text-black">SEO / GEO</option>
-            <option className="text-black">Digital Marketing</option>
-            <option className="text-black">AI Product Development</option>
+            <option value="Website Development" className="text-black">
+              Website Development
+            </option>
+
+            <option value="Web / Cloud Application" className="text-black">
+              Web / Cloud Application
+            </option>
+
+            <option value="Mobile Application" className="text-black">
+              Mobile Application
+            </option>
+
+            <option value="Digital Marketing" className="text-black">
+              Digital Marketing
+            </option>
+
+            <option value="Social Media Marketing" className="text-black">
+              Social Media Marketing
+            </option>
           </select>
         </div>
       </div>
