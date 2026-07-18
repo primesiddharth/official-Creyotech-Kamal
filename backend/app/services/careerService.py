@@ -2,6 +2,8 @@ import os
 import shutil
 from pathlib import Path
 
+from typing import Optional
+
 from fastapi import UploadFile
 
 from app.core.config import settings
@@ -55,6 +57,7 @@ class CareerService:
         resume: UploadFile,
         address_proof: UploadFile,
         marksheet: UploadFile,
+        phone_number: Optional[str] = None,
     ) -> CareerResponse:
 
         logger.info("Career application request received.")
@@ -92,6 +95,7 @@ class CareerService:
             "career_email.html",
             {
                 "name": name,
+                "phone_number": phone_number or "",
                 "whatsapp_number": whatsapp_number,
                 "email": email,
                 "position": position,
