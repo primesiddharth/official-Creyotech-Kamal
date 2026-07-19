@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { submitCareerApplication } from "../../../services/careerService";
+import { submitCareerForm } from "../../../services/careerService";
 import {
   FileText,
   Shield,
@@ -10,6 +10,7 @@ import {
   Briefcase,
   Loader2,
 } from "lucide-react";
+
 import FormField from "./FormField";
 import UploadCard from "./UploadCard";
 import ApplicationSuccess from "./ApplicationSuccess";
@@ -53,59 +54,92 @@ function JobApply({ job, compact = false }) {
 
   const validateForm = () => {
     const newErrors = {};
+
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
     }
+
     if (!formData.lastName.trim()) {
       newErrors.lastName = "Last name is required";
     }
+
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    if (!files.resume) newErrors.resume = "Please upload your resume";
-    if (!files.govtProof)
+
+    if (!formData.whatsapp.trim()) {
+      newErrors.whatsapp = "WhatsApp number is required";
+    }
+
+    if (!files.resume) {
+      newErrors.resume = "Please upload your resume";
+    }
+
+    if (!files.govtProof) {
       newErrors.govtProof =
-        "Please upload your govt. id(Aadhar/PAN/EPIC/Driving Licence)";
-    if (!files.education)
+        "Please upload your govt. ID (Aadhar/PAN/EPIC/Driving Licence)";
+    }
+
+    if (!files.education) {
       newErrors.education = "Please upload your latest education certificate";
-    if (!formData.agreed)
+    }
+
+    if (!formData.agreed) {
       newErrors.agreed = "You must agree to the terms to proceed";
+    }
 
     setErrors(newErrors);
+
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setErrors((prev) => ({
+      ...prev,
+      form: "",
+    }));
+
     try {
-      const payload = new FormData();
-      const fullName = [formData.firstName, formData.lastName]
-        .filter(Boolean)
-        .join(" ")
-        .trim();
+      const data = new FormData();
 
-      payload.append("name", fullName);
-      payload.append("whatsapp_number", (formData.whatsapp || "").trim());
-      payload.append("email", formData.email);
-      payload.append("position", job?.title || "General Application");
-      payload.append(
-        "recaptcha_token",
-        import.meta.env.VITE_RECAPTCHA_TOKEN || "test",
+      // Personal details
+      data.append(
+        "name",
+        `${formData.firstName.trim()} ${formData.lastName.trim()}`,
       );
-      payload.append("resume", files.resume);
-      payload.append("address_proof", files.govtProof);
-      payload.append("marksheet", files.education);
 
-      await submitCareerApplication(payload);
+      data.append("email", formData.email.trim());
 
-      setIsSubmitted(true);
-    } catch {
-      setErrors({ form: "Something went wrong. Please try again." });
+      data.append("whatsapp_number", formData.whatsapp.trim());
+
+      data.append("position", job?.title || "General Application");
+
+      // Documents
+      data.append("resume", files.resume);
+
+      data.append("address_proof", files.govtProof);
+
+      data.append("marksheet", files.education);
+
+      const response = await submitCareerForm(data);
+
+      if (response.success) {
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Career Application Error:", error);
+
+      setErrors((prev) => ({
+        ...prev,
+        form: error.message || "Something went wrong. Please try again.",
+      }));
     } finally {
       setIsSubmitting(false);
     }

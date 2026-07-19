@@ -113,7 +113,7 @@ function ContactForm() {
         <div className="md:col-span-7 bg-white dark:bg-secondary p-6 sm:p-8 rounded-2xl border border-border-light dark:border-border-dark shadow-sm">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
-              Let's build something together
+              Let&apos;s build something together
             </h2>
             <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
               Fill out the form below and our team will get back to you shortly.
