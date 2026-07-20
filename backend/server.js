@@ -1,3 +1,6 @@
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -14,12 +17,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://creyotech.com",
-      "https://creyotech-official-website.vercel.app",
-      process.env.FRONTEND_URL,
-    ],
+    origin: ["http://localhost:5173", process.env.FRONTEND_URL],
     methods: ["GET", "POST"],
     credentials: true,
   }),
