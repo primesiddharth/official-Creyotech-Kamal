@@ -49,11 +49,15 @@ export const submitContactForm = async (req, res) => {
       message: "Contact form submitted successfully.",
     });
   } catch (error) {
-    console.error("Contact Form Error:", error);
+    console.error("Contact Form Error:", {
+      message: error.message,
+      code: error.code,
+      response: error.response,
+      command: error.command,
+    });
 
     return res.status(500).json({
       success: false,
-
       message: "Failed to submit contact form.",
     });
   }
