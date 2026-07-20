@@ -1,4 +1,3 @@
-import nodemailer from "nodemailer";
 import { google } from "googleapis";
 
 export const sendEmail = async ({
@@ -9,60 +8,102 @@ export const sendEmail = async ({
   attachments = [],
 }) => {
   try {
+    // Create OAuth2 client
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI,
     );
 
+    // Set refresh token
     oauth2Client.setCredentials({
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
 
-    const accessTokenResponse = await oauth2Client.getAccessToken();
+    // Create Gmail API client
+    const gmail = google.gmail({
+      version: "v1",
+      auth: oauth2Client,
+    });
 
-    const accessToken = accessTokenResponse.token;
+    const boundary = `boundary_${Date.now()}`;
 
-    if (!accessToken) {
-      throw new Error("Failed to generate Google OAuth access token");
+    const messageParts = [
+      `From: "Creyotech Website" <${process.env.GMAIL_USER}>`,
+      `To: ${to}`,
+      `Reply-To: ${replyTo}`,
+      `Subject: ${subject}`,
+      "MIME-Version: 1.0",
+    ];
+
+    // If there are attachments, use multipart MIME
+    if (attachments.length > 0) {
+      messageParts.push(
+        `Content-Type: multipart/mixed; boundary="${boundary}"`,
+        "",
+        `--${boundary}`,
+        'Content-Type: text/html; charset="UTF-8"',
+        "Content-Transfer-Encoding: 7bit",
+        "",
+        html,
+      );
+
+      for (const attachment of attachments) {
+        const filename = attachment.filename || "attachment";
+
+        const contentType =
+          attachment.contentType || "application/octet-stream";
+
+        let content = attachment.content;
+
+        // Convert Buffer to base64
+        if (Buffer.isBuffer(content)) {
+          content = content.toString("base64");
+        }
+
+        messageParts.push(
+          `--${boundary}`,
+          `Content-Type: ${contentType}; name="${filename}"`,
+          "Content-Transfer-Encoding: base64",
+          `Content-Disposition: attachment; filename="${filename}"`,
+          "",
+          content,
+        );
+      }
+
+      messageParts.push(`--${boundary}--`);
+    } else {
+      // No attachments
+      messageParts.push('Content-Type: text/html; charset="UTF-8"', "", html);
     }
 
-    console.log("OAuth Access Token Generated:", Boolean(accessToken));
+    const email = messageParts.join("\r\n");
 
-    console.log("Sending email as:", process.env.GMAIL_USER);
+    // Gmail API requires base64url encoding
+    const encodedMessage = Buffer.from(email)
+      .toString("base64")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
+    const response = await gmail.users.messages.send({
+      userId: "me",
 
-      auth: {
-        type: "OAuth2",
-        user: process.env.GMAIL_USER,
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-        accessToken,
+      requestBody: {
+        raw: encodedMessage,
       },
     });
 
-    // Test authentication
-    await transporter.verify();
+    console.log("Email sent successfully via Gmail API:", response.data.id);
 
-    console.log("Nodemailer Gmail authentication successful");
-
-    const info = await transporter.sendMail({
-      from: `"Creyotech Website" <${process.env.GMAIL_USER}>`,
-      to,
-      replyTo,
-      subject,
-      html,
-      attachments,
-    });
-
-    console.log("Email sent successfully:", info.messageId);
-
-    return info;
+    return response.data;
   } catch (error) {
-    console.error("Nodemailer Error:", error);
+    console.error("Gmail API Error:", {
+      message: error.message,
+      code: error.code,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
 
     throw error;
   }
