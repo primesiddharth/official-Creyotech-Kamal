@@ -120,6 +120,16 @@ import UrbanGlowEssentials from "../assets/prev-customer-logo/UrbanGlow_Essentia
 import UrbanNestHospitality from "../assets/prev-customer-logo/UrbanNest_Hospitality.webp";
 import VitaCoreHospitals from "../assets/prev-customer-logo/VitaCore_Hospitals.webp";
 import ZenithWealthAdvisors from "../assets/prev-customer-logo/Zenith_Wealth_Advisors.webp";
+import clientReview1 from "../assets/client-reviews/client-review1.webp";
+import clientReview2 from "../assets/client-reviews/client-review2.webp";
+import clientReview3 from "../assets/client-reviews/client-review3.webp";
+import clientReview4 from "../assets/client-reviews/client-review4.webp";
+import clientReview5 from "../assets/client-reviews/client-review5.webp";
+import clientReview6 from "../assets/client-reviews/client-review6.webp";
+import clientReview7 from "../assets/client-reviews/client-review7.webp";
+import clientReview8 from "../assets/client-reviews/client-review8.webp";
+import clientReview9 from "../assets/client-reviews/client-review9.webp";
+import clientReview10 from "../assets/client-reviews/client-review10.webp";
 
 export const prev_customers = [
   { name: "AgroNova Solutions", logo: AgroNovaSolutions },
@@ -146,6 +156,19 @@ export const prev_customers = [
   { name: "UrbanNest Hospitality", logo: UrbanNestHospitality },
   { name: "VitaCore Hospitals", logo: VitaCoreHospitals },
   { name: "Zenith Wealth Advisors", logo: ZenithWealthAdvisors },
+];
+
+export const client_reviews = [
+  clientReview1,
+  clientReview2,
+  clientReview3,
+  clientReview4,
+  clientReview5,
+  clientReview6,
+  clientReview7,
+  clientReview8,
+  clientReview9,
+  clientReview10,
 ];
 
 export const service_images = {

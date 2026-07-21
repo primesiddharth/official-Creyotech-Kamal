@@ -92,7 +92,7 @@ function ContactForm() {
     dark:border-border-dark
   "
         >
-          <div className="grid lg:grid-cols-[1fr_1.1fr]">
+          <div className="grid lg:grid-cols-[1fr_1fr]">
             {/* Left */}
             <div className="bg-bg-light p-5 dark:bg-secondary sm:p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -149,17 +149,24 @@ function ContactForm() {
                       WhatsApp Number
                     </label>
 
-                    <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-bg-soft px-4 transition-all focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10">
-                      <FiPhone className="text-lg text-text-secondary" />
+                    <div className="flex items-center rounded-2xl border border-border-light bg-bg-soft px-4 transition-all focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10 dark:border-border-dark dark:bg-bg-dark">
+                      <FiPhone className="mr-2 shrink-0 text-lg text-text-secondary" />
+
+                      {/* Only for UI */}
+                      <div className="flex shrink-0 items-center border-r border-slate-300 pr-3 text-sm font-medium text-slate-700 dark:border-slate-700 dark:text-slate-300">
+                        <span>+91</span>
+                      </div>
 
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+91 9876543210"
+                        maxLength={10}
+                        inputMode="numeric"
+                        placeholder="9876543210"
                         required
-                        className="w-full bg-transparent py-3 outline-none dark:text-secondary"
+                        className="w-full bg-transparent py-3 pl-3 outline-none text-slate-900 placeholder:text-slate-400 dark:text-secondary dark:placeholder:text-slate-500"
                       />
                     </div>
                   </div>

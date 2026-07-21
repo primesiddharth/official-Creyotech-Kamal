@@ -78,8 +78,7 @@ function JobApply({ job, compact = false }) {
     }
 
     if (!files.govtProof) {
-      newErrors.govtProof =
-        "Please upload your govt. ID (Aadhar/PAN/EPIC)";
+      newErrors.govtProof = "Please upload your govt. ID (Aadhar/PAN/EPIC)";
     }
 
     if (!files.education) {
@@ -237,7 +236,8 @@ function JobApply({ job, compact = false }) {
                 name="whatsapp"
                 type="tel"
                 icon={<MessageCircle size={16} />}
-                placeholder="+91 94726 56693"
+                prefix="+91"
+                placeholder="94726 56693"
                 value={formData.whatsapp}
                 onChange={handleInputChange}
                 error={errors.whatsapp}

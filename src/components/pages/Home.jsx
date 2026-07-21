@@ -14,6 +14,7 @@ import AnimatedParagraph from "../home/AnimatedParagraph";
 import IndustriesSection from "../home/IndustriesSection";
 import AnimatedStats from "../AnimatedStats";
 import PreviousClients from "../home/PreviousClients";
+import ClientReviews from "../home/ClientReviews";
 
 function Home() {
   return (
@@ -34,6 +35,7 @@ function Home() {
       <LatestWork />
       <EngagementModels />
       <TechnologyStack />
+      <ClientReviews/>
       <FAQ />
       <Contact />
     </>
