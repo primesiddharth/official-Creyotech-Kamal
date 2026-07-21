@@ -79,7 +79,7 @@ function JobApply({ job, compact = false }) {
 
     if (!files.govtProof) {
       newErrors.govtProof =
-        "Please upload your govt. ID (Aadhar/PAN/EPIC/Driving Licence)";
+        "Please upload your govt. ID (Aadhar/PAN/EPIC)";
     }
 
     if (!files.education) {
@@ -172,169 +172,153 @@ function JobApply({ job, compact = false }) {
   return (
     <section
       id="apply"
-      className={compact ? "w-full" : "py-24 transition-colors duration-300"}
+      className={
+        compact ? "w-full" : "py-6 md:py-8 transition-colors duration-300"
+      }
     >
-      <div className={compact ? "mx-auto w-full" : "mx-auto max-w-4xl px-6"}>
-        {!compact && (
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-              Apply for this Position
-            </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
-              Fill in your details and upload the required documentation down
-              below.
-            </p>
-          </div>
-        )}
-
+      <div className={compact ? "mx-auto w-full" : "mx-auto max-w-3xl px-4"}>
         <form
           onSubmit={handleSubmit}
           noValidate
-          className={`rounded-[28px] border border-slate-200/70 bg-white shadow-[0_20px_50px_-24px_rgba(15,23,42,0.35)] transition-all dark:border-zinc-800 dark:bg-bg-dark dark:text-white ${compact ? "p-6 md:p-7" : "p-8"}`}
+          className={`rounded-2xl border border-slate-200/80 bg-white shadow-xl dark:border-zinc-800 dark:bg-bg-dark dark:text-white ${
+            compact ? "p-4 md:p-3.5" : "p-5 md:p-6"
+          }`}
         >
-          <div className="mb-8 rounded-2xl bg-linear-to-r from-indigo-600 via-violet-600 to-fuchsia-600 p-4 text-white shadow-lg shadow-indigo-600/20">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-indigo-100">
-                  Quick application
-                </p>
-                <h3 className="mt-1 text-lg font-semibold">
-                  Share your details and upload the required files
-                </h3>
-              </div>
-              <div className="rounded-2xl bg-white/15 p-2.5 backdrop-blur-sm">
-                <Briefcase size={18} />
-              </div>
+          {/* Form Header / Position Tag */}
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 dark:border-zinc-800/80">
+            <h3 className="text-base font-bold tracking-tight text-slate-900 dark:text-white">
+              Job Application
+            </h3>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-zinc-800 dark:text-zinc-300">
+              <Briefcase size={13} className="text-indigo-500" />
+              <span>{job?.title || "General Application"}</span>
             </div>
           </div>
 
-          {/* Personal Details */}
-          <h3 className="mb-6 text-lg font-semibold tracking-tight text-slate-900 dark:text-white">
-            Personal Details
-          </h3>
-          <div className="grid gap-6 md:grid-cols-2 mb-10">
-            <FormField
-              label="First Name"
-              name="firstName"
-              icon={<User size={18} />}
-              placeholder="Ram"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              error={errors.firstName}
-            />
+          {/* Personal Details (Grid) */}
+          <div className="mb-4">
+            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500">
+              Personal Info
+            </h4>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <FormField
+                label="First Name"
+                name="firstName"
+                icon={<User size={16} />}
+                placeholder="Ram"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                error={errors.firstName}
+              />
 
-            <FormField
-              label="Last Name"
-              name="lastName"
-              icon={<User size={18} />}
-              placeholder="Sharma"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              error={errors.lastName}
-            />
+              <FormField
+                label="Last Name"
+                name="lastName"
+                icon={<User size={16} />}
+                placeholder="Sharma"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                error={errors.lastName}
+              />
 
-            <FormField
-              label="Email Address"
-              name="email"
-              type="email"
-              icon={<Mail size={18} />}
-              placeholder="ramsharma@gmail.com"
-              value={formData.email}
-              onChange={handleInputChange}
-              error={errors.email}
-            />
-            <FormField
-              label="WhatsApp Number"
-              name="whatsapp"
-              type="tel"
-              icon={<MessageCircle size={18} />}
-              placeholder="+91 94726 56693"
-              value={formData.whatsapp}
-              onChange={handleInputChange}
-              error={errors.whatsapp}
-            />
-            <FormField
-              label="Position Applying For"
-              name="position"
-              icon={<Briefcase size={18} />}
-              placeholder="Position"
-              value={job?.title || "General Application"}
-              readOnly
-              className="md:col-span-2"
-            />
+              <FormField
+                label="Email Address"
+                name="email"
+                type="email"
+                icon={<Mail size={16} />}
+                placeholder="ramsharma@gmail.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                error={errors.email}
+              />
+
+              <FormField
+                label="WhatsApp Number"
+                name="whatsapp"
+                type="tel"
+                icon={<MessageCircle size={16} />}
+                placeholder="+91 94726 56693"
+                value={formData.whatsapp}
+                onChange={handleInputChange}
+                error={errors.whatsapp}
+              />
+            </div>
           </div>
 
-          {/* Uploads */}
-          <h3 className="mb-6 text-lg font-semibold tracking-tight text-slate-900 dark:text-white">
-            Required Documents
-          </h3>
-          <div className="mb-8 grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            <UploadCard
-              title="Resume / CV *"
-              icon={<FileText size={18} />}
-              file={files.resume}
-              error={errors.resume}
-              onFileSelect={(file) => handleFileChange("resume", file)}
-              onClear={() => handleFileChange("resume", null)}
-            />
+          {/* Required Documents (Compact Grid) */}
+          <div className="mb-4">
+            <h4 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500">
+              Required Documents
+            </h4>
+            <div className="grid gap-2 grid-cols-1 sm:grid-cols-3">
+              <UploadCard
+                title="Resume / CV *"
+                icon={<FileText size={16} />}
+                file={files.resume}
+                error={errors.resume}
+                onFileSelect={(file) => handleFileChange("resume", file)}
+                onClear={() => handleFileChange("resume", null)}
+              />
 
-            <UploadCard
-              title="Government ID *"
-              icon={<Shield size={18} />}
-              file={files.govtProof}
-              error={errors.govtProof}
-              onFileSelect={(file) => handleFileChange("govtProof", file)}
-              onClear={() => handleFileChange("govtProof", null)}
-            />
+              <UploadCard
+                title="Government ID *"
+                icon={<Shield size={16} />}
+                file={files.govtProof}
+                error={errors.govtProof}
+                onFileSelect={(file) => handleFileChange("govtProof", file)}
+                onClear={() => handleFileChange("govtProof", null)}
+              />
 
-            <UploadCard
-              title="Education Proof  *"
-              icon={<GraduationCap size={18} />}
-              file={files.education}
-              error={errors.education}
-              onFileSelect={(file) => handleFileChange("education", file)}
-              onClear={() => handleFileChange("education", null)}
-            />
+              <UploadCard
+                title="Education Proof *"
+                icon={<GraduationCap size={16} />}
+                file={files.education}
+                error={errors.education}
+                onFileSelect={(file) => handleFileChange("education", file)}
+                onClear={() => handleFileChange("education", null)}
+              />
+            </div>
           </div>
 
-          {/* Legal/Checkbox Verification */}
-          <div className="flex flex-col gap-2 mt-8">
-            <label className="flex items-start gap-3 cursor-pointer group select-none">
+          {/* Agreement & Validation Error */}
+          <div className="mt-4 flex flex-col gap-1.5 border-t border-slate-100 pt-3 dark:border-zinc-800/80">
+            <label className="flex items-start gap-2.5 cursor-pointer group select-none">
               <input
                 type="checkbox"
                 name="agreed"
                 checked={formData.agreed}
                 onChange={handleInputChange}
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 transition cursor-pointer"
+                className="mt-0.5 h-3 w-3 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 transition cursor-pointer shrink-0"
               />
-              <span className="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition">
-                I certify that the information provided is accurate and I agree
-                to the processing of my application materials.
+              <span className="text-xs text-slate-600 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white transition leading-normal">
+                I certify that the information provided is accurate and agree to
+                the application processing.
               </span>
             </label>
+
             {errors.agreed && (
-              <p className="text-xs font-medium text-rose-500 pl-7">
+              <p className="text-xs font-medium text-rose-500 pl-6">
                 {errors.agreed}
+              </p>
+            )}
+
+            {errors.form && (
+              <p className="text-xs font-medium text-rose-500 text-center">
+                {errors.form}
               </p>
             )}
           </div>
 
-          {errors.form && (
-            <p className="mt-4 text-sm font-medium text-rose-500 text-center">
-              {errors.form}
-            </p>
-          )}
-
-          {/* Submit Button */}
+          {/* Action Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-8 w-full inline-flex justify-center items-center gap-2 rounded-xl bg-linear-to-r from-indigo-600 to-violet-600 py-4 text-base font-semibold text-white shadow-lg shadow-indigo-600/20 transition-all hover:from-indigo-500 hover:to-violet-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 active:scale-[0.99] disabled:from-indigo-600/50 disabled:to-violet-600/50"
+            className="mt-3 w-full inline-flex justify-center items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 py-2.5 px-4 text-sm font-semibold text-white shadow-md shadow-indigo-600/15 transition-all hover:from-indigo-500 hover:to-violet-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 active:scale-[0.99] disabled:opacity-60"
           >
             {isSubmitting ? (
               <>
-                <Loader2 size={18} className="animate-spin" />
-                Processing Application...
+                <Loader2 size={16} className="animate-spin" />
+                <span>Processing...</span>
               </>
             ) : (
               "Submit Application"

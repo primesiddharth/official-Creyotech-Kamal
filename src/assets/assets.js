@@ -96,6 +96,57 @@ import digitalmarketing from "./services/digital-marketing.webp";
 import socialmedia from "./services/social-media-marketing.webp";
 import supportAgent from "./support.webp";
 import GreatPlaceToWork from "../assets/great-place-to-work.webp";
+import AgroNovaSolutions from "../assets/prev-customer-logo/AgroNova_Solutions.webp";
+import BluePeakInvestments from "../assets/prev-customer-logo/BluePeak_Investments.webp";
+import DailyScopeNews from "../assets/prev-customer-logo/DailyScope_News.webp";
+import GreenHarvestFarms from "../assets/prev-customer-logo/GreenHarvest_Farms.webp";
+import HealSphereClinics from "../assets/prev-customer-logo/HealSphere_Clinics.webp";
+import HorizonInternationalSchool from "../assets/prev-customer-logo/Horizon_International_School_logo.webp";
+import InsightWireMedia from "../assets/prev-customer-logo/InsightWire_Media.webp";
+import LuxuryGrandVistaResort from "../assets/prev-customer-logo/Luxury_Grand_Vista_Resort.webp";
+import LuxuryJewelleryLogoAuraGold from "../assets/prev-customer-logo/Luxury_Jewellery_Logo_AuraGold.webp";
+import NexForgeIndustries from "../assets/prev-customer-logo/NexForge_Industries_logo_design.webp";
+import PrimeVestCapital from "../assets/prev-customer-logo/PrimeVest_Capital_logo_design.webp";
+import PureNestLiving from "../assets/prev-customer-logo/PureNest_Living.webp";
+import QuantumEdgeAdvisors from "../assets/prev-customer-logo/QuantumEdge_Advisors.webp";
+import SantiCureMedicalCenter from "../assets/prev-customer-logo/SantiCure_Medical_Center_logo_.webp";
+import SapphireGlowDiamonds from "../assets/prev-customer-logo/SapphireGlow_Diamonds_luxury.webp";
+import ScholarsBridgeAcademy from "../assets/prev-customer-logo/ScholarsBridge_Academy.webp";
+import SteelNovaFabrication from "../assets/prev-customer-logo/SteelNova_Fabrication_Industrial.webp";
+import TechAxisConsulting from "../assets/prev-customer-logo/TechAxis_Consulting_logo_design.webp";
+import TerraGrowAgroIndustries from "../assets/prev-customer-logo/TerraGrow_Agro_Industries.webp";
+import TitanCoreEngineering from "../assets/prev-customer-logo/TitanCore_Engineering_logo.webp";
+import UrbanGlowEssentials from "../assets/prev-customer-logo/UrbanGlow_Essentials.webp";
+import UrbanNestHospitality from "../assets/prev-customer-logo/UrbanNest_Hospitality.webp";
+import VitaCoreHospitals from "../assets/prev-customer-logo/VitaCore_Hospitals.webp";
+import ZenithWealthAdvisors from "../assets/prev-customer-logo/Zenith_Wealth_Advisors.webp";
+
+export const prev_customers = [
+  { name: "AgroNova Solutions", logo: AgroNovaSolutions },
+  { name: "BluePeak Investments", logo: BluePeakInvestments },
+  { name: "DailyScope News", logo: DailyScopeNews },
+  { name: "GreenHarvest Farms", logo: GreenHarvestFarms },
+  { name: "HealSphere Clinics", logo: HealSphereClinics },
+  { name: "Horizon International School", logo: HorizonInternationalSchool },
+  { name: "InsightWire Media", logo: InsightWireMedia },
+  { name: "Luxury Grand Vista Resort", logo: LuxuryGrandVistaResort },
+  { name: "AuraGold Jewellery", logo: LuxuryJewelleryLogoAuraGold },
+  { name: "NexForge Industries", logo: NexForgeIndustries },
+  { name: "PrimeVest Capital", logo: PrimeVestCapital },
+  { name: "PureNest Living", logo: PureNestLiving },
+  { name: "QuantumEdge Advisors", logo: QuantumEdgeAdvisors },
+  { name: "SantiCure Medical Center", logo: SantiCureMedicalCenter },
+  { name: "SapphireGlow Diamonds", logo: SapphireGlowDiamonds },
+  { name: "ScholarsBridge Academy", logo: ScholarsBridgeAcademy },
+  { name: "SteelNova Fabrication", logo: SteelNovaFabrication },
+  { name: "TechAxis Consulting", logo: TechAxisConsulting },
+  { name: "TerraGrow Agro Industries", logo: TerraGrowAgroIndustries },
+  { name: "TitanCore Engineering", logo: TitanCoreEngineering },
+  { name: "UrbanGlow Essentials", logo: UrbanGlowEssentials },
+  { name: "UrbanNest Hospitality", logo: UrbanNestHospitality },
+  { name: "VitaCore Hospitals", logo: VitaCoreHospitals },
+  { name: "Zenith Wealth Advisors", logo: ZenithWealthAdvisors },
+];
 
 export const service_images = {
   webapp,

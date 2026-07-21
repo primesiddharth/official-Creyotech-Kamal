@@ -26,7 +26,7 @@ function FormField({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full rounded-2xl border border-gray-200 bg-gray-50/70 py-3 pl-11 pr-4 text-sm shadow-sm outline-none transition-all placeholder:text-gray-400 dark:border-zinc-700 dark:bg-zinc-800/60
+          className={`w-full rounded-2xl border border-gray-200 bg-gray-50/70 py-2 pl-11 pr-4 text-sm shadow-sm outline-none transition-all placeholder:text-gray-400 dark:border-zinc-700 dark:bg-zinc-800/60
             ${
               error
                 ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/10 dark:border-rose-500/40"

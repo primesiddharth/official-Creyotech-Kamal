@@ -13,6 +13,7 @@ import TechnologyStack from "../home/TechnologyStack";
 import AnimatedParagraph from "../home/AnimatedParagraph";
 import IndustriesSection from "../home/IndustriesSection";
 import AnimatedStats from "../AnimatedStats";
+import PreviousClients from "../home/PreviousClients";
 
 function Home() {
   return (
@@ -26,6 +27,7 @@ function Home() {
       />
       <SpecialityCard />
       <Services />
+      <PreviousClients/>
       <IndustriesSection/>
       <BuiltInAssurances />
       <AnimatedStats/>

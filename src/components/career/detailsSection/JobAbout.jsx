@@ -54,7 +54,7 @@ function JobAbout({ job }) {
   ];
 
   return (
-    <section className="py-12 md:py-10 ">
+    <section className="py-12 md:py-4 ">
       <div className="mx-auto max-w-7xl px-0">
         <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr] xl:items-start">
           <div className="max-h-full overflow-y-auto bg-white/90 p-6 rounded-2xl  dark:border-white/10 dark:bg-secondary md:p-8">
