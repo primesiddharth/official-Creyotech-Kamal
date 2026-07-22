@@ -35,11 +35,9 @@ export const submitContactForm = async (req, res) => {
 
     await sendEmail({
       to: process.env.GMAIL_RECEIVER_EMAIL,
-
+      senderName: name,
       replyTo: email,
-
-      subject: "New Contact Form Submission - Creyotech",
-
+      subject: `Solution required for - ${solution_required}`,
       html,
     });
 

@@ -66,7 +66,7 @@ function UploadCard({ title, icon, file, error, onFileSelect, onClear }) {
         <input
           ref={fileInputRef}
           type="file"
-          accept=".pdf,.doc,.docx"
+          accept=".pdf"
           className="hidden"
           onChange={handleFileSelection}
         />
@@ -79,8 +79,13 @@ function UploadCard({ title, icon, file, error, onFileSelect, onClear }) {
             <p className="mb-1 max-w-full truncate px-3 text-xs font-medium text-gray-900 dark:text-zinc-100">
               {file.name}
             </p>
-            <p className="mb-2 text-[11px] text-gray-400">
+            <p
+              className={`mb-2 text-[11px] ${
+                file.size > 1024 * 1024 ? "text-red-500" : "text-gray-400"
+              }`}
+            >
               {(file.size / (1024 * 1024)).toFixed(2)} MB
+              {file.size > 1024 * 1024 && " — Max 1 MB allowed"}
             </p>
             <button
               type="button"
@@ -106,9 +111,7 @@ function UploadCard({ title, icon, file, error, onFileSelect, onClear }) {
                 or drag & drop
               </span>
             </p>
-            <p className="mt-1 text-[10px] text-gray-400">
-              PDF, DOC, or DOCX up to 10MB
-            </p>
+            <p className="mt-1 text-[10px] text-gray-400">PDF up to 1MB</p>
           </>
         )}
       </div>

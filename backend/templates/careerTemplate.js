@@ -8,8 +8,6 @@ export const careerTemplate = ({ name, email, whatsapp_number, position }) => {
         padding: 20px;
       "
     >
-      <h2>New Career Application</h2>
-
       <p>
         A new candidate has submitted an application
         through the Creyotech Careers page.

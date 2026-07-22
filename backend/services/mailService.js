@@ -4,6 +4,7 @@ export const sendEmail = async ({
   to,
   replyTo,
   subject,
+  senderName="Creyotech Career",
   html,
   attachments = [],
 }) => {
@@ -29,9 +30,9 @@ export const sendEmail = async ({
     const boundary = `boundary_${Date.now()}`;
 
     const messageParts = [
-      `From: "Creyotech Website" <${process.env.GMAIL_USER}>`,
+      `From: "${senderName}" <${process.env.GMAIL_USER}>`,
       `To: ${to}`,
-      `Reply-To: ${replyTo}`,
+      `Reply-To: "${senderName}" ${replyTo}`,
       `Subject: ${subject}`,
       "MIME-Version: 1.0",
     ];

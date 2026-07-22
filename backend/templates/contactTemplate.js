@@ -14,11 +14,6 @@ export const contactTemplate = ({
         margin: auto;
       "
     >
-
-      <h2>
-        New Contact Form Submission
-      </h2>
-
       <p>
         A new inquiry has been submitted
         through the Creyotech website.

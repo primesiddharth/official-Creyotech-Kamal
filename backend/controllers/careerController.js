@@ -1,5 +1,6 @@
 import { sendEmail } from "../services/mailService.js";
 import { careerTemplate } from "../templates/careerTemplate.js";
+import crypto from "crypto";
 
 export const submitCareerForm = async (req, res) => {
   try {
@@ -28,6 +29,32 @@ export const submitCareerForm = async (req, res) => {
       });
     }
 
+    // Generate hash from actual file content
+    const getFileHash = (file) => {
+      return crypto.createHash("sha256").update(file.buffer).digest("hex");
+    };
+
+    const resumeHash = getFileHash(resume);
+    const addressProofHash = getFileHash(addressProof);
+    const marksheetHash = getFileHash(marksheet);
+
+    // Check for duplicate files
+    const hashes = [resumeHash, addressProofHash, marksheetHash];
+
+    if (new Set(hashes).size !== hashes.length) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Duplicate files are not allowed. Please upload correct PDF files.",
+      });
+    }
+
+    // Make filename safe
+    const safeName = name
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^a-zA-Z0-9_-]/g, "");
+
     // Generate email template
     const html = careerTemplate({
       name,
@@ -36,32 +63,34 @@ export const submitCareerForm = async (req, res) => {
       position,
     });
 
-    // Prepare attachments
+    // Prepare attachments with structured filenames
     const attachments = [
       {
-        filename: resume.originalname,
+        filename: `${safeName}_Resume.pdf`,
         content: resume.buffer,
+        contentType: "application/pdf",
       },
       {
-        filename: addressProof.originalname,
+        filename: `${safeName}_Address_Proof.pdf`,
         content: addressProof.buffer,
+        contentType: "application/pdf",
       },
       {
-        filename: marksheet.originalname,
+        filename: `${safeName}_Marksheet.pdf`,
         content: marksheet.buffer,
+        contentType: "application/pdf",
       },
     ];
 
     // Send email
     await sendEmail({
       to: process.env.GMAIL_RECEIVER_EMAIL,
+      senderName: name,
       replyTo: email,
-      subject: `New Career Application - ${position}`,
+      subject: `Application for - ${position}`,
       html,
       attachments,
     });
-
-    console.log(`Career application received from ${email} for ${position}`);
 
     return res.status(200).json({
       success: true,
