@@ -70,6 +70,7 @@ function CreyoMethod() {
 
   return (
     <section
+    id="purpose"
       ref={ref}
       style={{ height: `${methods.length * 20}vh` }}
       className="relative bg-bg-soft dark:bg-bg-dark"

@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import ServiceCarousel from "./home/ServiceCarousel";
 import { submitContactForm } from "../services/contactService";
+import ServiceSelect from "./ServiceSelect";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -181,30 +182,14 @@ function ContactForm() {
                   <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-bg-soft px-4 transition-all focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10">
                     <HiOutlineBriefcase className="text-lg text-text-secondary" />
 
-                    <select
+                    <ServiceSelect
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
                       required
                       className="w-full bg-transparent py-3 outline-none dark:text-secondary"
-                    >
-                      <option value="">Select a Service</option>
-                      <option value="Website Development">
-                        Website Development
-                      </option>
-                      <option value="Web / Cloud Application">
-                        Web / Cloud Application
-                      </option>
-                      <option value="Mobile Application">
-                        Mobile Application
-                      </option>
-                      <option value="Digital Marketing">
-                        Digital Marketing
-                      </option>
-                      <option value="Social Media Marketing">
-                        Social Media Marketing
-                      </option>
-                    </select>
+                    />
+                    
                   </div>
                 </div>
 

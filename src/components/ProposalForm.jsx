@@ -9,6 +9,7 @@ import {
 import { HiOutlineBriefcase } from "react-icons/hi";
 import toast from "react-hot-toast";
 import { submitContactForm } from "../services/contactService";
+import ServiceSelect from "./ServiceSelect";
 
 function ProposalForm() {
   const [formData, setFormData] = useState({
@@ -97,37 +98,14 @@ function ProposalForm() {
         <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-bg-soft px-4 dark:border-border-dark dark:bg-white/[0.03]">
           <HiOutlineBriefcase className="text-text-secondary" />
 
-          <select
+          <ServiceSelect
             name="service"
             value={formData.service}
             onChange={handleChange}
             required
-            className="w-full bg-transparent py-3 outline-none text-text-primary dark:text-white"
-          >
-            <option value="" className="text-text-primary">
-              Select Service
-            </option>
-
-            <option value="Website Development" className="text-black">
-              Website Development
-            </option>
-
-            <option value="Web / Cloud Application" className="text-black">
-              Web / Cloud Application
-            </option>
-
-            <option value="Mobile Application" className="text-black">
-              Mobile Application
-            </option>
-
-            <option value="Digital Marketing" className="text-black">
-              Digital Marketing
-            </option>
-
-            <option value="Social Media Marketing" className="text-black">
-              Social Media Marketing
-            </option>
-          </select>
+            className="w-full bg-transparent py-3 outline-none dark:text-secondary"
+          />
+          
         </div>
       </div>
 

@@ -18,13 +18,17 @@ import PrivacyPolicyy from "./components/pages/PrivacyPolicyy";
 import RefundPolicy from "./components/pages/RefundPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
 import ProjectDeliveryPolicy from "./components/pages/ProjectDeliveryPolicy";
+import Products from "./components/pages/Products";
+import CaseStudies from "./components/pages/CaseStudies";
+import Whitepapers from "./components/pages/Whitepapers";
+import BusinessAssistance from "./components/pages/services/BusinessAssistance";
 
 function App() {
   return (
     <BrowserRouter>
       <Toaster position="top-right" />
       <ScrollToTop />
-      <ScrollToHash/>
+      <ScrollToHash />
       <ProposalSidebar />
       <ChatWidget />
       <Routes>
@@ -34,6 +38,9 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/career/:slug" element={<JobDetails />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/whitepapers" element={<Whitepapers />} />
           <Route
             path="/services/web-development"
             element={<WebDevelopment />}
@@ -47,9 +54,14 @@ function App() {
             element={<SocialMediaMarketing />}
           />
           <Route
+            path="/services/business-assistance"
+            element={<BusinessAssistance />}
+          />
+          <Route
             path="/services/miscellaneous-services"
             element={<MiscellaneousServices />}
           />
+
           <Route path="/privacy-policy" element={<PrivacyPolicyy />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

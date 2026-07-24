@@ -1,6 +1,23 @@
+import {
+  BriefcaseBusiness,
+  Building2,
+  ContactRound,
+  FileText,
+  Heart,
+  Hotel,
+  Target,
+  Users,
+  UsersRound,
+  Workflow,
+} from "lucide-react";
+
 export const serviceSections = [
+  // =====================================================
+  // 1. DEVELOPMENT
+  // =====================================================
   {
-    title: "Web Development",
+    id: "web-development",
+    title: "Development Services",
     href: "/services/web-development",
     items: [
       {
@@ -19,10 +36,34 @@ export const serviceSections = [
         title: "Full-Stack Scalable System",
         href: "/services/web-development#fullstack-scalable-system",
       },
+
+      // Mobile Application Development
+      {
+        title: "Android App Development",
+        href: "/services/web-development#android-app-development",
+      },
+      {
+        title: "iOS App Development",
+        href: "/services/web-development#ios-app-development",
+      },
+      {
+        title: "Cross-Platform App Development",
+        href: "/services/web-development#cross-platform-app-development",
+      },
+
+      // WordPress
+      {
+        title: "WordPress Development",
+        href: "/services/web-development#wordpress-development",
+      },
     ],
   },
 
+  // =====================================================
+  // 2. DIGITAL MARKETING
+  // =====================================================
   {
+    id: "digital-marketing",
     title: "Digital Marketing",
     href: "/services/digital-marketing",
     items: [
@@ -38,10 +79,36 @@ export const serviceSections = [
         title: "Scale Revenue Acquisition System",
         href: "/services/digital-marketing#scale-revenue-system",
       },
+
+      // Performance Marketing
+      {
+        title: "Facebook Ads",
+        href: "/services/digital-marketing#facebook-ads",
+      },
+      {
+        title: "Instagram Ads",
+        href: "/services/digital-marketing#instagram-ads",
+      },
+      {
+        title: "Google Ads",
+        href: "/services/digital-marketing#google-ads",
+      },
+      {
+        title: "LinkedIn Ads",
+        href: "/services/digital-marketing#linkedin-ads",
+      },
+      {
+        title: "Performance Marketing",
+        href: "/services/digital-marketing#performance-marketing",
+      },
     ],
   },
 
+  // =====================================================
+  // 3. SOCIAL MEDIA MARKETING
+  // =====================================================
   {
+    id: "social-media-marketing",
     title: "Social Media Marketing",
     href: "/services/social-media-marketing",
     items: [
@@ -57,10 +124,73 @@ export const serviceSections = [
         title: "Scale & Authority Plan",
         href: "/services/social-media-marketing#scale-authority-plan",
       },
+      {
+        title: "Facebook Marketing",
+        href: "/services/social-media-marketing#facebook-marketing",
+      },
+      {
+        title: "Instagram Marketing",
+        href: "/services/social-media-marketing#instagram-marketing",
+      },
+      {
+        title: "LinkedIn Marketing",
+        href: "/services/social-media-marketing#linkedin-marketing",
+      },
+      {
+        title: "Social Media Management",
+        href: "/services/social-media-marketing#social-media-management",
+      },
     ],
   },
 
+  // =====================================================
+  // 5. BUSINESS ASSISTANCE
+  // =====================================================
   {
+    id: "business-assistance",
+    title: "Business Assistance",
+    href: "/services/business-assistance",
+    items: [
+      {
+        title: "DPIIT / Startup India Registration",
+        href: "/services/business-assistance#dpiit-registration",
+      },
+      {
+        title: "Company Registration",
+        href: "/services/business-assistance#company-registration",
+      },
+      {
+        title: "Certification Assistance",
+        href: "/services/business-assistance#certification",
+      },
+      {
+        title: "Compliance Registration",
+        href: "/services/business-assistance#compliance-registration",
+      },
+      {
+        title: "GST Registration",
+        href: "/services/business-assistance#gst-registration",
+      },
+      {
+        title: "GST Return Assistance",
+        href: "/services/business-assistance#gst-return",
+      },
+      {
+        title: "Loan Processing Assistance",
+        href: "/services/business-assistance#loan-processing",
+      },
+      {
+        title: "Project Vetting",
+        href: "/services/business-assistance#project-vetting",
+      },
+    ],
+  },
+
+  // =====================================================
+  // 4. MISCELLANEOUS SERVICES
+  // =====================================================
+  {
+    id: "miscellaneous-services",
     title: "Miscellaneous Services",
     href: "/services/miscellaneous-services",
     items: [
@@ -77,8 +207,12 @@ export const serviceSections = [
         href: "/services/miscellaneous-services#rcs-messaging",
       },
       {
-        title: "Call & WhatsApp API",
-        href: "/services/miscellaneous-services#call-whatsapp-api",
+        title: "WhatsApp Business API",
+        href: "/services/miscellaneous-services#whatsapp-business-api",
+      },
+      {
+        title: "Call API",
+        href: "/services/miscellaneous-services#call-api",
       },
       {
         title: "Professional Email Setup",
@@ -88,6 +222,8 @@ export const serviceSections = [
         title: "Google Workspace",
         href: "/services/miscellaneous-services#google-workspace",
       },
+
+      // Software / Platforms
       {
         title: "KarobarOne",
         href: "/services/miscellaneous-services#karobarone",
@@ -97,13 +233,90 @@ export const serviceSections = [
         href: "/services/miscellaneous-services#creyotech-crm",
       },
       {
-        title: "Creyotech Hotel Management",
+        title: "Hotel Management System",
         href: "/services/miscellaneous-services#hotel-management",
       },
       {
-        title: "Creyotech School Management",
+        title: "School Management System",
         href: "/services/miscellaneous-services#school-management",
       },
     ],
   },
 ];
+
+export const products = [
+  {
+    title: "SankalpFlow",
+    description: "Work Management System",
+    href: "/products",
+    icon: Workflow,
+  },
+  {
+    title: "AtithiCore",
+    description: "Hotel & Restaurant Management System",
+    href: "/products",
+    icon: Hotel,
+  },
+  {
+    title: "SampattiLink",
+    description: "Real Estate Management System",
+    href: "/products",
+    icon: Building2,
+  },
+  {
+    title: "KarmiHR",
+    description: "Employee Management System",
+    href: "/products",
+    icon: UsersRound,
+  },
+  {
+    title: "SamparkPulse",
+    description: "Customer Relationship Management",
+    href: "/products",
+    icon: ContactRound,
+  },
+];
+
+export const aboutMenu = {
+  company: [
+    {
+      title: "About Creyotech",
+      desc: "Who we are and what we do",
+      href: "/about#about-company",
+      icon: Building2,
+    },
+    {
+      title: "Our Purpose",
+      desc: "What drives us forward",
+      href: "/about#purpose",
+      icon: Target,
+    },
+    {
+      title: "Our Team",
+      desc: "Meet the people behind Creyotech",
+      href: "/about#our-team",
+      icon: Users,
+    },
+    {
+      title: "Life at Creyotech",
+      desc: "Our culture, people and workplace",
+      href: "/about#life-at-creyotech",
+      icon: Heart,
+    },
+  ],
+
+  resources: [
+    {
+      title: "Case Studies",
+      desc: "Explore our work and results",
+      href: "/case-studies",
+      icon: BriefcaseBusiness,
+    },
+    {
+      title: "Whitepapers",
+      desc: "Insights, research and expertise",
+      href: "/whitepapers",
+      icon: FileText,
+    },
+  ],
+};

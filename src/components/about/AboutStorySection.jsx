@@ -4,6 +4,7 @@ import assets from "../../assets/assets";
 export default function AboutStorySection() {
   return (
     <section
+    id="about-company"
       className="
         relative
         overflow-hidden

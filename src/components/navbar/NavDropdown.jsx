@@ -6,7 +6,7 @@ function NavDropdown({
   activeMenu,
   setActiveMenu,
   menuKey,
-  width = "w-[min(95vw,1200px)]",
+  width = "",
   children,
 }) {
   const isActive = activeMenu === menuKey;

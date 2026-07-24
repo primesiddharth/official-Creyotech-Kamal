@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 function Teams() {
   return (
     <motion.div
+    id="our-team"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

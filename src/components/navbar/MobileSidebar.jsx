@@ -2,10 +2,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import assets from "../../assets/assets";
-import { serviceSections } from "./navbarData";
+import { serviceSections, products } from "./navbarData";
 
 function MobileSidebar({ setSideBarOpen }) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   const closeMenu = () => setSideBarOpen(false);
 
@@ -69,6 +70,49 @@ function MobileSidebar({ setSideBarOpen }) {
                 </NavLink>
               );
             })}
+          </div>
+        </div>
+      </div>
+      
+      {/* Products Dropdown */}
+      <div className="flex flex-col">
+        <button
+          onClick={() => setProductsOpen(!productsOpen)}
+          className="flex items-center justify-between text-lg font-medium text-white/90"
+        >
+          <span>Products</span>
+
+          {productsOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            productsOpen ? "mt-3 max-h-96" : "max-h-0"
+          }`}
+        >
+          <div className="flex flex-col gap-3 border-l border-white/20 pl-4">
+            {products.map((product) => (
+              <NavLink
+                key={product.href}
+                to={product.href}
+                onClick={closeMenu}
+                className="text-base text-white/80 transition hover:text-white"
+              >
+                <span className="block">{product.title}</span>
+
+                <span className="block text-xs text-white/50">
+                  {product.description}
+                </span>
+              </NavLink>
+            ))}
+
+            <NavLink
+              to="/products"
+              onClick={closeMenu}
+              className="text-sm font-medium text-white"
+            >
+              View All Products →
+            </NavLink>
           </div>
         </div>
       </div>

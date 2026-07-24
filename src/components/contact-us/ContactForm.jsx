@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { submitContactForm } from "../../services/contactService";
+import ServiceSelect from "../ServiceSelect";
 
 function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -189,23 +190,15 @@ function ContactForm() {
               <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
                 Select Service <span className="text-red-500">*</span>
               </label>
-              <select
+
+              <ServiceSelect
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
-              >
-                <option value="">Choose an option</option>
-                <option value="Website Development">Website Development</option>
-                <option value="Web / Cloud Application">
-                  Web / Cloud Application
-                </option>
-                <option value="Mobile Application">Mobile Application</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="Social Media Marketing">
-                  Social Media Marketing
-                </option>
-              </select>
+                required
+                className="w-full bg-transparent py-3 outline-none dark:text-secondary"
+              />
+              
               {errors.service && (
                 <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
                   {errors.service}

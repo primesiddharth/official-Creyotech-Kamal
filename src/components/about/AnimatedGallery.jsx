@@ -14,6 +14,7 @@ function AnimatedGallery() {
 
   return (
     <section
+      id="life-at-creyotech"
       className="
         relative
         overflow-hidden

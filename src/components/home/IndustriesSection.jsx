@@ -1,70 +1,64 @@
 import { motion } from "motion/react";
 import {
+  Rocket,
+  Store,
   Factory,
-  ShoppingBag,
-  Landmark,
-  Hotel,
-  ShoppingCart,
+  HeartPulse,
   Cpu,
-  Brain,
-  Boxes,
-  TrendingUp,
+  Landmark,
+  ShoppingBag,
+  PackageCheck,
 } from "lucide-react";
 
 const industries = [
   {
-    icon: Factory,
-    value: "18+",
-    title: "Manufacturing",
-    desc: "Industrial systems & automation",
-  },
-  {
-    icon: ShoppingBag,
-    value: "12+",
-    title: "Retail",
-    desc: "Smart retail infrastructure",
+    icon: Rocket,
+    value: "MVP",
+    title: "Startups & MVP",
+    desc: "From early ideas to market-ready products",
   },
   {
     icon: Landmark,
-    value: "9+",
-    title: "Finance",
-    desc: "Secure and scalable platforms",
+    value: "FinTech",
+    title: "Finance & Banking",
+    desc: "Secure digital experiences for financial services",
   },
   {
-    icon: Hotel,
-    value: "14+",
-    title: "Hospitality",
-    desc: "Booking and management systems",
+    icon: Factory,
+    value: "B2B",
+    title: "Manufacturing",
+    desc: "Modern systems for industrial operations",
   },
   {
-    icon: ShoppingCart,
-    value: "25+",
-    title: "E-commerce",
-    desc: "Conversion-focused digital stores",
+    icon: HeartPulse,
+    value: "Care",
+    title: "Healthcare",
+    desc: "Reliable digital solutions for healthcare",
+  },
+  {
+    icon: PackageCheck,
+    value: "Commerce",
+    title: "Dropshipping",
+    desc: "Commerce solutions designed to sell and scale",
   },
   {
     icon: Cpu,
-    value: "30+",
-    title: "Automation",
-    desc: "Workflow optimization systems",
+    value: "Tech",
+    title: "High Tech",
+    desc: "Scalable solutions for technology companies",
+  },
+
+  {
+    icon: ShoppingBag,
+    value: "D2C",
+    title: "D2C Brands",
+    desc: "Digital experiences built for modern brands",
   },
   {
-    icon: Brain,
-    value: "100%",
-    title: "AI Products",
-    desc: "AI-first digital experiences",
-  },
-  {
-    icon: Boxes,
-    value: "7+",
-    title: "SaaS Platforms",
-    desc: "Scalable internal products",
-  },
-  {
-    icon: TrendingUp,
-    value: "93+",
-    title: "Growth Solutions",
-    desc: "Helping businesses scale faster",
+    icon: Store,
+    value: "MSME",
+    title: "Micro, Small & Medium Businesses",
+    desc: "Digital solutions for growing businesses",
   },
 ];
 
@@ -86,11 +80,10 @@ function IndustriesSection() {
           Powering Multiple Industries
         </h2>
 
-        <p className="mt-5 text-sm leading-8 text-text-secondary dark:text-white/70 sm:text-base">
+        <p className="mt-5 text-sm leading-6 text-text-secondary dark:text-white/70 sm:text-base">
           We build scalable digital systems across industries, combining
           strategy, automation, and modern technology.
         </p>
-        
       </div>
       <motion.div
         animate={{ x: [0, -10, 0] }}
@@ -169,12 +162,12 @@ function IndustriesSection() {
               </h3>
 
               {/* Industry Name */}
-              <p className="mt-3 text-lg font-semibold text-text-primary dark:text-text-light">
+              <p className="mt-3 text-lg leading-5 font-semibold text-text-primary dark:text-text-light">
                 {item.title}
               </p>
 
               {/* Description */}
-              <p className="mt-2 text-sm leading-7 text-text-secondary dark:text-white/60">
+              <p className="mt-2 text-sm leading-5 text-text-secondary dark:text-white/60">
                 {item.desc}
               </p>
 
