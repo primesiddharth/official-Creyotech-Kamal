@@ -128,7 +128,7 @@ export default function ClientReviews() {
               dark:text-slate-400
             "
           >
-            Real experiences from businesses we've helped transform through
+            Real experiences from businesses we&apos;ve helped transform through
             design, technology and digital strategy.
           </p>
         </motion.div>

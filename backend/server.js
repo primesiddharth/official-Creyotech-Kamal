@@ -84,7 +84,7 @@ app.get("/auth/google/callback", async (req, res) => {
 app.use("/contact", contactRoutes);
 app.use("/career", careerRoutes);
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error("Server Error:", err);
 
   if (err.code === "LIMIT_FILE_SIZE") {

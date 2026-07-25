@@ -393,7 +393,7 @@ function Products() {
 
           <div className="relative">
             <span className="text-xs font-semibold uppercase tracking-[2px] text-primary">
-              Let's build better
+              Let&apos;s build better
             </span>
 
             <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold sm:text-4xl">

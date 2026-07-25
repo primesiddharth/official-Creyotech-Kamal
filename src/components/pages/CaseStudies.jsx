@@ -311,7 +311,7 @@ function CaseStudies() {
                 dark:text-white
               "
             >
-              Work we're proud of.
+              Work we&apos;re proud of.
             </h2>
           </div>
 
@@ -662,7 +662,7 @@ function CaseStudies() {
                 text-slate-400
               "
             >
-              Let's turn your idea, challenge or existing product into a digital
+              Let&apos;s turn your idea, challenge or existing product into a digital
               experience that creates measurable business value.
             </p>
 

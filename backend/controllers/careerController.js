@@ -1,3 +1,4 @@
+import path from "path";
 import { sendEmail } from "../services/mailService.js";
 import { careerTemplate } from "../templates/careerTemplate.js";
 import crypto from "crypto";
@@ -68,17 +69,21 @@ export const submitCareerForm = async (req, res) => {
       {
         filename: `${safeName}_Resume.pdf`,
         content: resume.buffer,
-        contentType: "application/pdf",
+        contentType: resume.mimetype,
       },
       {
-        filename: `${safeName}_Address_Proof.pdf`,
+        filename: `${safeName}_Address_Proof${path.extname(
+          addressProof.originalname,
+        )}`,
         content: addressProof.buffer,
-        contentType: "application/pdf",
+        contentType: addressProof.mimetype,
       },
       {
-        filename: `${safeName}_Marksheet.pdf`,
+        filename: `${safeName}_Marksheet${path.extname(
+          marksheet.originalname,
+        )}`,
         content: marksheet.buffer,
-        contentType: "application/pdf",
+        contentType: marksheet.mimetype,
       },
     ];
 
