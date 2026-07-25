@@ -1,7 +1,15 @@
 import { useRef, useState } from "react";
 import { X } from "lucide-react";
 
-function UploadCard({ title, icon, file, error, onFileSelect, onClear }) {
+function UploadCard({
+  title,
+  icon,
+  file,
+  error,
+  onFileSelect,
+  onClear,
+  accept,
+}) {
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -66,7 +74,7 @@ function UploadCard({ title, icon, file, error, onFileSelect, onClear }) {
         <input
           ref={fileInputRef}
           type="file"
-          accept=".pdf"
+          accept={accept}
           className="hidden"
           onChange={handleFileSelection}
         />

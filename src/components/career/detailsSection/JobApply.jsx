@@ -46,10 +46,73 @@ function JobApply({ job, compact = false }) {
   };
 
   const handleFileChange = (key, file) => {
-    setFiles((prev) => ({ ...prev, [key]: file }));
-    if (errors[key]) {
+    if (!file) {
+      setFiles((prev) => ({ ...prev, [key]: null }));
       setErrors((prev) => ({ ...prev, [key]: "" }));
+      return;
     }
+
+    const extension = `.${file.name.split(".").pop()?.toLowerCase()}`;
+
+    const documentExtensions = [".pdf", ".jpg", ".jpeg", ".png"];
+    const documentMimeTypes = ["application/pdf", "image/jpeg", "image/png"];
+
+    let errorMessage = "";
+
+    // Resume
+    if (
+      key === "resume" &&
+      (extension !== ".pdf" || file.type !== "application/pdf")
+    ) {
+      errorMessage = "Resume must be uploaded as a PDF file.";
+    }
+
+    // Government ID
+    else if (
+      key === "govtProof" &&
+      (!documentExtensions.includes(extension) ||
+        !documentMimeTypes.includes(file.type))
+    ) {
+      errorMessage = "Government ID must be a PDF, JPG, JPEG, or PNG file.";
+    }
+
+    // Education Proof
+    else if (
+      key === "education" &&
+      (!documentExtensions.includes(extension) ||
+        !documentMimeTypes.includes(file.type))
+    ) {
+      errorMessage = "Education proof must be a PDF, JPG, JPEG, or PNG file.";
+    }
+
+    // 1 MB limit
+    else if (file.size > 1 * 1024 * 1024) {
+      errorMessage = "File size must not exceed 1 MB.";
+    }
+
+    if (errorMessage) {
+      setFiles((prev) => ({
+        ...prev,
+        [key]: null,
+      }));
+
+      setErrors((prev) => ({
+        ...prev,
+        [key]: errorMessage,
+      }));
+
+      return;
+    }
+
+    setFiles((prev) => ({
+      ...prev,
+      [key]: file,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [key]: "",
+    }));
   };
 
   const validateForm = () => {
@@ -256,6 +319,7 @@ function JobApply({ job, compact = false }) {
                 icon={<FileText size={16} />}
                 file={files.resume}
                 error={errors.resume}
+                accept=".pdf,application/pdf"
                 onFileSelect={(file) => handleFileChange("resume", file)}
                 onClear={() => handleFileChange("resume", null)}
               />
@@ -265,6 +329,7 @@ function JobApply({ job, compact = false }) {
                 icon={<Shield size={16} />}
                 file={files.govtProof}
                 error={errors.govtProof}
+                accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
                 onFileSelect={(file) => handleFileChange("govtProof", file)}
                 onClear={() => handleFileChange("govtProof", null)}
               />
@@ -274,6 +339,7 @@ function JobApply({ job, compact = false }) {
                 icon={<GraduationCap size={16} />}
                 file={files.education}
                 error={errors.education}
+                accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
                 onFileSelect={(file) => handleFileChange("education", file)}
                 onClear={() => handleFileChange("education", null)}
               />
