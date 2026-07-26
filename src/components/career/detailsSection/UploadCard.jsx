@@ -9,6 +9,7 @@ function UploadCard({
   onFileSelect,
   onClear,
   accept,
+  helperText = "PDF up to 1 MB",
 }) {
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef(null);
@@ -119,7 +120,7 @@ function UploadCard({
                 or drag & drop
               </span>
             </p>
-            <p className="mt-1 text-[10px] text-gray-400">PDF up to 1MB</p>
+            <p className="mt-1 text-[10px] text-gray-400">{helperText}</p>
           </>
         )}
       </div>

@@ -322,6 +322,7 @@ function JobApply({ job, compact = false }) {
                 accept=".pdf,application/pdf"
                 onFileSelect={(file) => handleFileChange("resume", file)}
                 onClear={() => handleFileChange("resume", null)}
+                helperText="PDF only • Max 1 MB"
               />
 
               <UploadCard
@@ -332,6 +333,7 @@ function JobApply({ job, compact = false }) {
                 accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
                 onFileSelect={(file) => handleFileChange("govtProof", file)}
                 onClear={() => handleFileChange("govtProof", null)}
+                helperText="PDF, JPG, JPEG or PNG • Max 1 MB"
               />
 
               <UploadCard
@@ -342,6 +344,7 @@ function JobApply({ job, compact = false }) {
                 accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
                 onFileSelect={(file) => handleFileChange("education", file)}
                 onClear={() => handleFileChange("education", null)}
+                helperText="PDF, JPG, JPEG or PNG • Max 1 MB"
               />
             </div>
           </div>
