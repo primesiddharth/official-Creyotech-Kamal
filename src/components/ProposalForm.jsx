@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   FiUser,
   FiMail,
@@ -6,12 +6,16 @@ import {
   FiMessageSquare,
   FiArrowRight,
 } from "react-icons/fi";
+
 import { HiOutlineBriefcase } from "react-icons/hi";
 import toast from "react-hot-toast";
 import { submitContactForm } from "../services/contactService";
 import ServiceSelect from "./ServiceSelect";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function ProposalForm() {
+  const recaptchaRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +34,14 @@ function ProposalForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Get reCAPTCHA v2 token
+    const recaptchaToken = recaptchaRef.current?.getValue();
+
+    if (!recaptchaToken) {
+      toast.error("Please complete the reCAPTCHA verification.");
+      return;
+    }
+
     const toastId = toast.loading("Sending proposal request...");
 
     try {
@@ -39,6 +51,9 @@ function ProposalForm() {
         whatsapp_number: formData.phone,
         problem_faced: formData.message,
         solution_required: formData.service,
+
+        // IMPORTANT
+        recaptchaToken,
       };
 
       const data = await submitContactForm(payload);
@@ -55,8 +70,13 @@ function ProposalForm() {
           service: "",
           message: "",
         });
+
+        recaptchaRef.current?.reset();
       }
     } catch (error) {
+      // Token should not be reused after failed verification/request
+      recaptchaRef.current?.reset();
+
       toast.error(error.message || "Failed to send request", {
         id: toastId,
       });
@@ -64,7 +84,7 @@ function ProposalForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+    <form onSubmit={handleSubmit} className="pt-5 space-y-3">
       <div className="grid md:grid-cols-2 gap-6">
         {/* Name */}
         <InputField
@@ -105,7 +125,6 @@ function ProposalForm() {
             required
             className="w-full bg-transparent py-3 outline-none dark:text-secondary"
           />
-          
         </div>
       </div>
 
@@ -123,7 +142,18 @@ function ProposalForm() {
           className="w-full resize-none bg-transparent outline-none dark:text-white"
         />
       </div>
-
+      <div className="mt-2">
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          onExpired={() => {
+            recaptchaRef.current?.reset();
+          }}
+          onErrored={() => {
+            toast.error("reCAPTCHA failed to load. Please try again.");
+          }}
+        />
+      </div>
       {/* Submit */}
       <button
         type="submit"
@@ -144,6 +174,7 @@ function ProposalForm() {
           duration-300
           hover:-translate-y-1
           hover:shadow-xl
+          cursor-pointer
         "
       >
         Request Proposal

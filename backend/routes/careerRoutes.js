@@ -3,6 +3,7 @@ import express from "express";
 import { submitCareerForm } from "../controllers/careerController.js";
 
 import { careerUpload } from "../middleware/upload.js";
+import verifyRecaptcha from "../middleware/verifyRecaptcha.js";
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.post(
       maxCount: 1,
     },
   ]),
-
+  verifyRecaptcha,
   submitCareerForm,
 );
 

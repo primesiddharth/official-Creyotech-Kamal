@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { submitContactForm } from "../../services/contactService";
 import ServiceSelect from "../ServiceSelect";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function ContactForm() {
+  const recaptchaRef = useRef(null);
+
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -68,6 +71,13 @@ function ContactForm() {
       return;
     }
 
+    const recaptchaToken = recaptchaRef.current?.getValue();
+
+    if (!recaptchaToken) {
+      toast.error("Please complete the reCAPTCHA verification.");
+      return;
+    }
+
     const toastId = toast.loading("Submitting inquiry...");
 
     try {
@@ -79,6 +89,7 @@ function ContactForm() {
         whatsapp_number: formData.phone,
         problem_faced: formData.message,
         solution_required: formData.service,
+        recaptchaToken,
       };
 
       const data = await submitContactForm(payload);
@@ -95,10 +106,13 @@ function ContactForm() {
           service: "",
           message: "",
         });
-
+        // Reset CAPTCHA after successful submission
+        recaptchaRef.current?.reset();
         setErrors({});
       }
     } catch (error) {
+      recaptchaRef.current?.reset();
+
       toast.error(error.message || "Something went wrong. Please try again.", {
         id: toastId,
       });
@@ -198,7 +212,7 @@ function ContactForm() {
                 required
                 className="w-full bg-transparent py-3 outline-none dark:text-secondary"
               />
-              
+
               {errors.service && (
                 <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
                   {errors.service}
@@ -225,7 +239,18 @@ function ContactForm() {
                 </p>
               )}
             </div>
-
+            <div className="mt-3">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onExpired={() => {
+                  recaptchaRef.current?.reset();
+                }}
+                onErrored={() => {
+                  toast.error("reCAPTCHA failed to load. Please try again.");
+                }}
+              />
+            </div>
             {/* Submit */}
             <button
               type="submit"

@@ -27,6 +27,7 @@ function ProposalSidebar() {
           font-semibold
           tracking-wide
           text-white
+          cursor-pointer
           [writing-mode:vertical-rl]
           shadow-xl
         "
@@ -68,7 +69,7 @@ function ProposalSidebar() {
                 border-l
                 border-border-light
                 bg-white
-                p-8
+                p-7
                 shadow-2xl
                 dark:border-border-dark
                 dark:bg-bg-dark
@@ -80,7 +81,8 @@ function ProposalSidebar() {
                 className="
                   absolute
                   right-6
-                  top-6
+                  top-3
+                  cursor-pointer
                   rounded-full
                   bg-black/5
                   p-2
@@ -91,7 +93,7 @@ function ProposalSidebar() {
               </button>
 
               {/* Header */}
-              <div className="mt-12">
+              <div className="py-2">
                 <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[2px] text-white">
                   Start a Project
                 </span>
