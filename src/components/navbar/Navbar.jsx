@@ -101,7 +101,20 @@ function Navbar({ theme, setTheme }) {
           </NavLink>
 
           <NavLinks activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-          
+          <NavLink
+            to="/mvp-development"
+            onClick={handleScrollTop}
+            className={({ isActive }) =>
+              `
+      transition-all
+      duration-300
+      hover:text-primary
+      ${isActive ? "text-primary" : ""}
+    `
+            }
+          >
+            MVP
+          </NavLink>
           <NavLink
             to="/career"
             onClick={handleScrollTop}

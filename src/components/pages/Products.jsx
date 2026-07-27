@@ -121,7 +121,7 @@ function Products() {
     <main className="overflow-hidden bg-white text-slate-900 dark:bg-secondary dark:text-white">
       {/* ================= HERO ================= */}
 
-      <section className="relative h-screen py-8 border-b border-slate-200/70 bg-slate-50/70 dark:border-white/10 dark:bg-slate-950/30">
+      <section className="relative flex min-h-[calc(100vh-70px)] items-center border-b border-slate-200/70 bg-slate-50/70 dark:border-white/10 dark:bg-slate-950/30">
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute left-1/2 top-0 h-[420px] w-[650px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />

@@ -73,7 +73,7 @@ function MobileSidebar({ setSideBarOpen }) {
           </div>
         </div>
       </div>
-      
+
       {/* Products Dropdown */}
       <div className="flex flex-col">
         <button
@@ -120,6 +120,10 @@ function MobileSidebar({ setSideBarOpen }) {
       {/* Other Links */}
       <NavLink to="/about" onClick={closeMenu} className={navClass}>
         About Us
+      </NavLink>
+
+      <NavLink to="/mvp-development" onClick={closeMenu} className={navClass}>
+        MVP
       </NavLink>
 
       <NavLink to="/career" onClick={closeMenu} className={navClass}>

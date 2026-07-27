@@ -22,6 +22,7 @@ import Products from "./components/pages/Products";
 import CaseStudies from "./components/pages/CaseStudies";
 import Whitepapers from "./components/pages/Whitepapers";
 import BusinessAssistance from "./components/pages/services/BusinessAssistance";
+import MVPDevelopment from "./components/pages/MVPDevelopment";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/whitepapers" element={<Whitepapers />} />
+          <Route path="/mvp-development" element={<MVPDevelopment />} />
           <Route
             path="/services/web-development"
             element={<WebDevelopment />}

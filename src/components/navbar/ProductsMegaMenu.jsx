@@ -48,7 +48,7 @@ function ProductsMegaMenu() {
 
           return (
             <Link
-              key={product.href}
+              key={product.title}
               to={product.href}
               className={`
                 group

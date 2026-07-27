@@ -247,33 +247,33 @@ export const serviceSections = [
 export const products = [
   {
     title: "SankalpFlow",
-    description: "Work Management System",
-    href: "/products",
+    description: "Work & project management",
     icon: Workflow,
+    href: "/products#sankalp-flow",
   },
   {
     title: "AtithiCore",
-    description: "Hotel & Restaurant Management System",
-    href: "/products",
+    description: "Hospitality management",
     icon: Hotel,
+    href: "/products#atithi-core",
   },
   {
     title: "SampattiLink",
-    description: "Real Estate Management System",
-    href: "/products",
+    description: "Real estate management",
     icon: Building2,
+    href: "/products#sampatti-link",
   },
   {
     title: "KarmiHR",
-    description: "Employee Management System",
-    href: "/products",
+    description: "HR & workforce management",
     icon: UsersRound,
+    href: "/products#karmi-hr",
   },
   {
     title: "SamparkPulse",
-    description: "Customer Relationship Management",
-    href: "/products",
+    description: "CRM & customer management",
     icon: ContactRound,
+    href: "/products#sampark-pulse",
   },
 ];
 
