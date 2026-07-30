@@ -306,25 +306,21 @@ function ContactForm() {
           <div className="h-[350px] w-full rounded-2xl overflow-hidden border border-border-light dark:border-border-dark shadow-inner relative group bg-zinc-100 dark:bg-bg-dark">
             <iframe
               title="Creyotech Location Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3687.573562388398!2d88.4041714!3d22.4450708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027371380ecbaf%3A0x7d7545f0ecf59042!2sCreyotech!5e0!3m2!1sen!2sin!4v1785421669373!5m2!1sen!2sin"
               width="100%"
               height="100%"
-              frameBorder="0"
-              scrolling="no"
-              marginHeight="0"
-              marginWidth="0"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=88.4100%2C22.4350%2C88.4400%2C22.4550&amp;layer=mapnik&amp;marker=22.4452%2C88.4241"
-              className="filter grayscale opacity-90 contrast-125 transition-all group-hover:grayscale-0 group-hover:opacity-100"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="border-0 transition-all duration-300 group-hover:scale-[1.02]"
             />
-            <div className="absolute bottom-2 right-2 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xs px-2 py-1 rounded text-[10px] text-zinc-500 dark:text-zinc-400 pointer-events-none">
-              <a
-                href="https://www.openstreetmap.org/?mlat=22.4452&amp;mlon=88.4241#map=16/22.4452/88.4241"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                View Larger Map
-              </a>
-            </div>
+            <a
+              href="https://www.google.com/maps?q=22.4452,88.4241"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-3 right-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-700 dark:text-zinc-200 hover:bg-white dark:hover:bg-zinc-800 transition"
+            >
+              View on Google Maps
+            </a>
           </div>
         </div>
       </div>
