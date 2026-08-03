@@ -317,10 +317,11 @@ function JobApply({ job, compact = false }) {
                 type="tel"
                 icon={<MessageCircle size={14} />}
                 prefix="+91"
-                placeholder="94726 56693"
+                placeholder="9472656693"
                 value={formData.whatsapp}
                 onChange={handleInputChange}
                 error={errors.whatsapp}
+                maxLength={10}
               />
             </div>
           </div>

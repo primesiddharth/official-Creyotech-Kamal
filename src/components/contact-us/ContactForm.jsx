@@ -188,9 +188,13 @@ function ContactForm() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+91 XXXXX XXXXX"
+                  maxLength={10}
+                  inputMode="numeric"
+                  placeholder="9876543210"
+                  required
                   className="h-12 w-full rounded-xl border border-border-light bg-bg-soft px-4 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-border-dark dark:bg-bg-dark dark:text-white"
                 />
+
                 {errors.phone && (
                   <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1 font-medium">
                     {errors.phone}
@@ -210,7 +214,7 @@ function ContactForm() {
                 value={formData.service}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent py-3 outline-none dark:text-secondary"
+                className="w-full bg-transparent rounded-xl border border-border-light dark:border-border-dark py-3 outline-none dark:text-secondary"
               />
 
               {errors.service && (
@@ -290,27 +294,31 @@ function ContactForm() {
         {/* Right Side: Map & Info Card */}
         <div className="md:col-span-5 space-y-6 lg:sticky lg:top-6">
           <div className="bg-zinc-50 dark:bg-secondary p-6 rounded-2xl border border-border-light dark:border-border-dark">
-            <h3 className="font-bold text-zinc-900 dark:text-white text-lg">
-              Our Location
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
+              Head Office
             </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
-              <strong>Creyotech</strong>
-              <br />
-              South Kumrakhali, Sonarpur
-              <br />
-              Kolkata, West Bengal — 700103
-            </p>
+
+            <div className="mt-3 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="font-medium text-zinc-900 dark:text-white">
+                Creyotech IT Services
+              </p>
+              <p>
+                Module 232, SDF Building EP & GP Block, Sector V Bidhannagar,
+                Kolkata West Bengal 700091, India
+              </p>
+            </div>
           </div>
 
           {/* Map Container */}
           <div className="h-[350px] w-full rounded-2xl overflow-hidden border border-border-light dark:border-border-dark shadow-inner relative group bg-zinc-100 dark:bg-bg-dark">
             <iframe
-              title="Creyotech Location Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3687.573562388398!2d88.4041714!3d22.4450708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027371380ecbaf%3A0x7d7545f0ecf59042!2sCreyotech!5e0!3m2!1sen!2sin!4v1785421669373!5m2!1sen!2sin"
+              title="Creyotech Kolkata Office"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.278350055459!2d88.4290293743367!3d22.568690433115442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275ad93ff8761%3A0xb594ae1e7384b2cb!2sModule%20232%2C%20SDF%20Building%2C%20EP%20%26%2C%20GP%20Block%2C%20Sector%20V%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal%20700091!5e0!3m2!1sen!2sin!4v1785769484771!5m2!1sen!2sin"
               width="100%"
               height="100%"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
               className="border-0 transition-all duration-300 group-hover:scale-[1.02]"
             />
             <a

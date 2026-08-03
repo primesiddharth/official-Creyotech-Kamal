@@ -110,6 +110,8 @@ function ProposalForm() {
           icon={<FiPhone />}
           name="phone"
           placeholder="WhatsApp Number"
+          maxLength={10}
+          inputMode="numeric"
           value={formData.phone}
           onChange={handleChange}
         />
@@ -191,6 +193,8 @@ function InputField({
   placeholder,
   value,
   onChange,
+  maxLength,
+  inputMode,
 }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-border-light bg-bg-soft px-4 dark:border-border-dark dark:bg-white/[0.03]">
@@ -202,6 +206,8 @@ function InputField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        maxLength={maxLength}
+        inputMode={inputMode}
         required
         className="w-full bg-transparent py-3 outline-none dark:text-white"
       />

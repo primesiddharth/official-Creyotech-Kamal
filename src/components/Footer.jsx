@@ -40,6 +40,28 @@ function Footer() {
     },
   ];
 
+  const offices = [
+    {
+      title: "Kolkata Office",
+      address:
+        "Module 232, SDF Building, EP & GP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091",
+    },
+    {
+      title: "Ahmedabad Office",
+      address:
+        "Zion Z1, Sindhu Bhavan Marg, Near Maple Country Road, Bodakdev, Ahmedabad, Gujarat 380059",
+    },
+    {
+      title: "Pune Office",
+      address:
+        "#101 & 111, World Trade Center, 1, Kharadi, Pune - 411014, Maharashtra, India",
+    },
+    {
+      title: "USA Office",
+      address: "North Center Street, Reno, NV 89501, USA",
+    },
+  ];
+
   return (
     <footer className="relative mt-15 overflow-hidden">
       {/* Fixed Background */}
@@ -113,56 +135,76 @@ function Footer() {
             </h3>
 
             <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-primary/15 p-3 text-primary">
+              <div className="rounded-xl bg-primary/15 p-3 text-primary shrink-0">
                 <MapPin size={18} />
               </div>
-              <div className="flex flex-col gap-2">
-                <p>
-                  Module 232, SDF Building, EP &, GP Block, Sector V,
-                  Bidhannagar, Kolkata, West Bengal 700091
-                </p>
-                <p className="leading-7">
-                  <span className="font-semibold text-blue-500">
-                    New Office Address
-                  </span>{" "}
-                  <br /> Zion Z1, Sindhu Bhavan Marg, Near Maple Country Road,
-                  Bodakdev, Ahmedabad, Gujarat 380059
-                </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Kolkata</h4>
+                  <p className="text-sm leading-6 text-white/70">
+                    Module 232, SDF Building, Sector V, Bidhannagar, Kolkata
+                    700091
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Ahmedabad</h4>
+                  <p className="text-sm leading-6 text-white/70">
+                    Zion Z1, Sindhu Bhavan Marg, Bodakdev, Gujarat 380059
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Pune</h4>
+                  <p className="text-sm leading-6 text-white/70">
+                    #101 & 111, World Trade Center, Kharadi, Pune 411014
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white mb-1">USA</h4>
+                  <p className="text-sm leading-6 text-white/70">
+                    North Center Street, Reno, NV 89501
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="rounded-xl bg-primary/15 p-3 text-primary">
-                <Phone size={18} />
-              </div>
-
-              <a
-                href="tel:+919674665053"
-                className="transition hover:text-primary"
-              >
-                (+91) 9674665053
-              </a>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="rounded-xl bg-primary/15 p-3 text-primary">
-                <Mail size={18} />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <a
-                  href="mailto:hr@creyotech.com"
-                  className="transition hover:text-primary"
-                >
-                  hr@creyotech.com
-                </a>
+            <div className="flex gap-12">
+              <div className="flex items-center gap-4">
+                <div className="rounded-xl bg-primary/15 p-3 text-primary">
+                  <Phone size={18} />
+                </div>
 
                 <a
-                  href="mailto:creyotech@gmail.com"
+                  href="tel:+919674665053"
                   className="transition hover:text-primary"
                 >
-                  creyotech@gmail.com
+                  (+91) 9674665053
                 </a>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="rounded-xl bg-primary/15 p-3 text-primary">
+                  <Mail size={18} />
+                </div>
+
+                <div className="flex flex-col">
+                  <a
+                    href="mailto:hr@creyotech.com"
+                    className="transition hover:text-primary"
+                  >
+                    hr@creyotech.com
+                  </a>
+
+                  <a
+                    href="mailto:creyotech@gmail.com"
+                    className="transition hover:text-primary"
+                  >
+                    creyotech@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
