@@ -131,11 +131,11 @@ import clientReview8 from "../assets/client-reviews/client-review8.webp";
 import clientReview9 from "../assets/client-reviews/client-review9.webp";
 import clientReview10 from "../assets/client-reviews/client-review10.webp";
 
-import luminaJewelHouse from "../assets/projects/lumina-jewel-house.png";
-import primeVistaRealEstate from "../assets/projects/prime-vista-real-estate.png";
-import horizonMulticareHospital from "../assets/projects/horizon-multicare-hospital.png";
-import drEmiliaDentalCare from "../assets/projects/dr-emilia-dental-care.png";
-
+import luminaJewelHouse from "../assets/projects/lumina-jewel-house.webp";
+import primeVistaRealEstate from "../assets/projects/prime-vista-real-estate.webp";
+import horizonMulticareHospital from "../assets/projects/horizon-multicare-hospital.webp";
+import drEmiliaDentalCare from "../assets/projects/dr-emilia-dental-care.webp";
+import projectHero from "../assets/projects/projects_hero.webp";
 
 export const prev_customers = [
   { name: "AgroNova Solutions", logo: AgroNovaSolutions },
