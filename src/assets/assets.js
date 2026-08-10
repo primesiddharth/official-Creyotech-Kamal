@@ -131,6 +131,12 @@ import clientReview8 from "../assets/client-reviews/client-review8.webp";
 import clientReview9 from "../assets/client-reviews/client-review9.webp";
 import clientReview10 from "../assets/client-reviews/client-review10.webp";
 
+import luminaJewelHouse from "../assets/projects/lumina-jewel-house.png";
+import primeVistaRealEstate from "../assets/projects/prime-vista-real-estate.png";
+import horizonMulticareHospital from "../assets/projects/horizon-multicare-hospital.png";
+import drEmiliaDentalCare from "../assets/projects/dr-emilia-dental-care.png";
+
+
 export const prev_customers = [
   { name: "AgroNova Solutions", logo: AgroNovaSolutions },
   { name: "BluePeak Investments", logo: BluePeakInvestments },

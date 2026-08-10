@@ -23,6 +23,7 @@ import CaseStudies from "./components/pages/CaseStudies";
 import Whitepapers from "./components/pages/Whitepapers";
 import BusinessAssistance from "./components/pages/services/BusinessAssistance";
 import MVPDevelopment from "./components/pages/MVPDevelopment";
+import OurWork from "./components/pages/OurWork";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/career/:slug" element={<JobDetails />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/our-work" element={<OurWork />} />
           <Route path="/products" element={<Products />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/whitepapers" element={<Whitepapers />} />

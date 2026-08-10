@@ -15,6 +15,7 @@ import IndustriesSection from "../home/IndustriesSection";
 import AnimatedStats from "../AnimatedStats";
 import PreviousClients from "../home/PreviousClients";
 import ClientReviews from "../home/ClientReviews";
+import FeaturedClientProjects from "../home/FeaturedClientProjects";
 
 function Home() {
   return (
@@ -26,6 +27,7 @@ function Home() {
         title="Our Global Technology Partners"
         logos={company_logos}
       />
+      <FeaturedClientProjects />
       <SpecialityCard />
       <Services />
       <PreviousClients/>
