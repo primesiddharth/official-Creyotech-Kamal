@@ -72,7 +72,7 @@ function ProductsMegaMenu() {
                 dark:hover:border-primary/30
                 dark:hover:bg-primary/10
 
-                ${index === products.length - 1 ? "col-span-2" : ""}
+                ${index === products.length - 1 ? "col-span-1" : ""}
               `}
             >
               {/* Icon */}

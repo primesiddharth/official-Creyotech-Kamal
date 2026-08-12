@@ -242,9 +242,52 @@ export const serviceSections = [
       },
     ],
   },
+
+  // 5. Web Dev Projects
+  {
+    id: "web-development-projects",
+    title: "Web Development Projects",
+    href: "/our-work",
+    items: [
+      {
+        title: "Dr. Emilia Dental Care",
+        href: "https://dremiliadentalcare.creyotech.com/",
+      },
+      {
+        title: "Horizon Multicare Hospital",
+        href: "https://horizonmulticarehospital.creyotech.com",
+      },
+      {
+        title: "Sterling Ledger Advisors",
+        href: "https://sterlingledgeradvisors.creyotech.com",
+      },
+      {
+        title: "ThreadCraft Fashion",
+        href: "https://threadcraftfashion.creyotech.com",
+      },
+      {
+        title: "Lumina Jewel House",
+        href: "https://luminajewelhouse.creyotech.com",
+      },
+      {
+        title: "Apex Build Construction",
+        href: "https://apexbuildconstruction.creyotech.com",
+      },
+      {
+        title: "PrimeVista Real Estate",
+        href: "https://primevistarealestate.creyotech.com",
+      },
+    ],
+  },
 ];
 
 export const products = [
+  {
+    title: "KarobarOne",
+    description: "Business management",
+    icon: BriefcaseBusiness,
+    href: "/products#karobar-one",
+  },
   {
     title: "SankalpFlow",
     description: "Work & project management",

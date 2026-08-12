@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
+  BriefcaseBusiness,
   Building2,
   Check,
   ContactRound,
@@ -16,6 +17,19 @@ import {
 } from "lucide-react";
 
 const products = [
+  {
+    name: "KarobarOne",
+    tag: "Business Management",
+    description:
+      "Manage your business, customers, products, sales and daily operations in one simple and organized workspace.",
+    icon: BriefcaseBusiness,
+    href: "/products/karobar-one",
+    features: [
+      "Business & customer management",
+      "Sales & inventory tracking",
+      "Reports & daily operations",
+    ],
+  },
   {
     name: "SankalpFlow",
     tag: "Work Management",
@@ -243,9 +257,9 @@ function Products() {
                   dark:hover:bg-slate-900/70
 
                   ${
-                    index < 3
+                    index < 7
                       ? "lg:col-span-2"
-                      : index === 3
+                      : index === 7
                         ? "lg:col-span-3"
                         : "lg:col-span-3"
                   }

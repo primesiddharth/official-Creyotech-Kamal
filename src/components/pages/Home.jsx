@@ -1,6 +1,6 @@
 import React from "react";
 import Services from "../Services";
-import LatestWork from "../LatestWork";
+// import LatestWork from "../LatestWork";
 import Contact from "../home/Contact";
 import { company_logos } from "../../assets/assets";
 import Hero from "../home/Hero";
@@ -34,7 +34,8 @@ function Home() {
       <IndustriesSection/>
       <BuiltInAssurances />
       <AnimatedStats/>
-      <LatestWork />
+      {/* Not required for now */}
+      {/* <LatestWork /> */}
       <EngagementModels />
       <TechnologyStack />
       <ClientReviews/>

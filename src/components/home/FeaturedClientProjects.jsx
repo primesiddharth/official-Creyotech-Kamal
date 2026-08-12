@@ -69,7 +69,7 @@ function FeaturedClientProjects() {
       max-w-3xl
       text-3xl
       font-bold
-      leading-12
+      md:leading-12
       tracking-tight
       text-text-primary
       sm:text-4xl
@@ -110,7 +110,7 @@ function FeaturedClientProjects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-8 lg:grid-cols-2"
+          className="grid grid-cols-1 gap-8 lg:grid-cols-3"
         >
           {featuredProjects.map((project) => (
             <motion.a

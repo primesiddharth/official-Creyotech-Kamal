@@ -17,7 +17,7 @@ export const clientProjects = [
     services: ["Website Development", "UI/UX Design"],
     image: drEmiliaDentalCare,
     href: "https://dremiliadentalcare.creyotech.com/",
-    featured: false,
+    featured: true,
   },
   {
     id: "lumina-jewel-house",
@@ -93,6 +93,6 @@ export const clientProjects = [
     services: ["Website Development", "UI/UX Design"],
     image: primeVistaRealEstate,
     href: "http://primevistarealestate.creyotech.com",
-    featured: false,
+    featured: true,
   },
 ];
