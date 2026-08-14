@@ -5,6 +5,7 @@ import threadcraftFashion from "../../assets/projects/threadcraft-fashion.webp";
 import luminaJewelHouse from "../../assets/projects/lumina-jewel-house.webp";
 import apexBuildConstruction from "../../assets/projects/apex-build-construction.webp";
 import primeVistaRealEstate from "../../assets/projects/prime-vista-real-estate.webp";
+import urbanNest from "../../assets/projects/urbanNest.png";
 
 export const clientProjects = [
   {
@@ -94,5 +95,18 @@ export const clientProjects = [
     image: primeVistaRealEstate,
     href: "http://primevistarealestate.creyotech.com",
     featured: true,
+  },
+
+  {
+    id: "urban-nest-interior-designers",
+    client: "UrbanNest Interior Designers",
+    title: "Interior Design Studio Website",
+    category: "Interior Design",
+    description:
+      "A modern digital presence designed to showcase UrbanNest's interior design services, residential and commercial projects, design expertise, and creative portfolio.",
+    services: ["Website Development", "UI/UX Design"],
+    image: urbanNest,
+    href: "https://urbannestinteriordesigners.creyotech.com/",
+    featured: false,
   },
 ];

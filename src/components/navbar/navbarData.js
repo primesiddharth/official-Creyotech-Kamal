@@ -250,32 +250,36 @@ export const serviceSections = [
     href: "/our-work",
     items: [
       {
-        title: "Dr. Emilia Dental Care",
+        title: "Dental Clinic",
         href: "https://dremiliadentalcare.creyotech.com/",
       },
       {
-        title: "Horizon Multicare Hospital",
+        title: "Multi-Speciality Hospital",
         href: "https://horizonmulticarehospital.creyotech.com",
       },
       {
-        title: "Sterling Ledger Advisors",
+        title: "CA / Accounting Firm",
         href: "https://sterlingledgeradvisors.creyotech.com",
       },
       {
-        title: "ThreadCraft Fashion",
+        title: "Clothing Store",
         href: "https://threadcraftfashion.creyotech.com",
       },
       {
-        title: "Lumina Jewel House",
+        title: "Jewellery Shop",
         href: "https://luminajewelhouse.creyotech.com",
       },
       {
-        title: "Apex Build Construction",
+        title: "Construction Company",
         href: "https://apexbuildconstruction.creyotech.com",
       },
       {
-        title: "PrimeVista Real Estate",
+        title: "Real Estate Agency",
         href: "https://primevistarealestate.creyotech.com",
+      },
+      {
+        title: "Interior Designer",
+        href: "https://urbannestinteriordesigners.creyotech.com",
       },
     ],
   },
