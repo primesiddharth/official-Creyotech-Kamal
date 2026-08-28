@@ -262,13 +262,10 @@ export const serviceSections = [
         href: "https://sterlingledgeradvisors.creyotech.com",
       },
       {
-        title: "Clothing Store",
-        href: "https://threadcraftfashion.creyotech.com",
+        title: "Law Firm",
+        href: "https://summitlegalpartners.creyotech.com",
       },
-      {
-        title: "Jewellery Shop",
-        href: "https://luminajewelhouse.creyotech.com",
-      },
+
       {
         title: "Construction Company",
         href: "https://apexbuildconstruction.creyotech.com",
@@ -277,10 +274,94 @@ export const serviceSections = [
         title: "Real Estate Agency",
         href: "https://primevistarealestate.creyotech.com",
       },
+
       {
-        title: "Interior Designer",
-        href: "https://urbannestinteriordesigners.creyotech.com",
+        title: "Clothing Store",
+        href: "https://threadcraftfashion.creyotech.com",
       },
+
+      {
+        title: "Jewellery Shop",
+        href: "https://luminajewelhouse.creyotech.com",
+      },
+      {
+        title: "Restaurant",
+        href: "https://theolivetable.creyotech.com",
+      },
+
+      {
+        title: "Doctor (Personal Brand)",
+        href: "https://drarjunmehra.creyotech.com",
+      },
+
+      {
+        title: "Bath Fittings, Sanitaryware & Bathroom Solutions",
+        href: "https://aquaflowbathsolutions.creyotech.com/",
+      },
+      {
+        title: "Interior Design Company",
+        href: "https://vistaspaceinteriors.creyotech.com/",
+      },
+      {
+        title: "Cooperative Bank",
+        href: "https://highlandvalleycooperativebank.creyotech.com/",
+      },
+
+      {
+        title: "Rubber Product Manufacturing & Export",
+        href: "https://surendrarubberexports.creyotech.com/",
+      },
+
+      {
+        title: "Steel Products Manufacturing & Export",
+        href: "https://easternsteelworks.creyotech.com/",
+      },
+      {
+        title: "Plastic Products Manufacturing",
+        href: "https://primeplastindustries.creyotech.com/",
+      },
+      {
+        title: "Paper Products Export",
+        href: "https://greenleafpaperexports.creyotech.com/",
+      },
+      {
+        title: "Fertility / IVF Center",
+        href: "https://lifespringfertilityivfcentre.creyotech.com/",
+      },
+      {
+        title: "Fitness Club",
+        href: "https://fitcorewellnessclub.creyotech.com/",
+      },
+      {
+        title: "Film Production Company",
+        href: "https://blueskyfilmsproductions.creyotech.com/",
+      },
+      {
+        title: "PR Agency – Premium B2B Service",
+        href: "https://elevateprcommunications.creyotech.com/",
+      },
+      {
+        title: "Labour & Security Personnel",
+        href: "https://secureforceworkforcesolutions.creyotech.com/",
+      },
+      {
+        title: "Logistics & Transport Company",
+        href: "https://swiftroutelogisticsindia.creyotech.com/",
+      },
+
+      {
+        title: "Rubber Chemical Importer & Distributor",
+        href: "https://pioneerrubberchemicalindiatrading.creyotech.com/",
+      },
+
+      //       {
+      //   title: "Café",
+      //   href: "https://brewandbloomcafe.creyotech.com/",
+      // },
+      //       {
+      //   title: "Interior Designer",
+      //   href: "https://urbannestinteriordesigners.creyotech.com",
+      // },
     ],
   },
 ];
@@ -290,13 +371,13 @@ export const products = [
     title: "KarobarOne",
     description: "Business management",
     icon: BriefcaseBusiness,
-    href: "/products#karobar-one",
+    href: "https://www.karobarone.com/",
   },
   {
     title: "SankalpFlow",
     description: "Work & project management",
     icon: Workflow,
-    href: "/products#sankalp-flow",
+    href: "https://sankalpflow.creyotech.com/",
   },
   {
     title: "AtithiCore",

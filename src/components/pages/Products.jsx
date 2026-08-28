@@ -23,7 +23,7 @@ const products = [
     description:
       "Manage your business, customers, products, sales and daily operations in one simple and organized workspace.",
     icon: BriefcaseBusiness,
-    href: "/products/karobar-one",
+    href: "https://www.karobarone.com",
     features: [
       "Business & customer management",
       "Sales & inventory tracking",
@@ -36,7 +36,7 @@ const products = [
     description:
       "Bring projects, tasks, teams and daily operations together in one organized workspace built for growing businesses.",
     icon: Workflow,
-    href: "/products/sankalp-flow",
+    href: "https://sankalpflow.creyotech.com",
     features: [
       "Project & task management",
       "Team collaboration",
