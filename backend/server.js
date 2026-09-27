@@ -1,3 +1,9 @@
+import cookieParser from "cookie-parser";
+import authRoutes from "./routes/authRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
+import managerRoutes from "./routes/managerRoutes.js";
+import partnerRoutes from "./routes/partnerRoutes.js";
+import { cleanupExpiredAccess } from "./services/cleanupService.js";
 import dns from "node:dns";
 dns.setDefaultResultOrder("ipv4first");
 
@@ -18,13 +24,15 @@ const PORT = process.env.PORT || 8000;
 app.use(
   cors({
     origin: ["http://localhost:5173", process.env.FRONTEND_URL],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
 );
-
+app.use("/partners", partnerRoutes);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req, res) => {
   res.json({
@@ -83,6 +91,9 @@ app.get("/auth/google/callback", async (req, res) => {
 
 app.use("/contact", contactRoutes);
 app.use("/career", careerRoutes);
+app.use("/auth", authRoutes);
+app.use("/students", studentRoutes);
+app.use("/manager", managerRoutes);
 
 app.use((err, req, res) => {
   console.error("Server Error:", err);
@@ -101,6 +112,9 @@ app.use((err, req, res) => {
     message: err.message || "Something went wrong.",
   });
 });
+
+setInterval(cleanupExpiredAccess, 60 * 60 * 1000);
+cleanupExpiredAccess();
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${PORT}`);
