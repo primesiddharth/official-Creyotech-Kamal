@@ -1,4 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ManagerDashboard from "./components/pages/intern/ManagerDashboard";
+import InternDirectory from "./components/pages/intern/InternDirectory";
+import InternVerification from "./components/pages/intern/InternVerification";
+import PartnerManagement from "./components/pages/intern/PartnerManagement";
+import { BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
 import Home from "./components/pages/Home";
 import AboutUs from "./components/pages/AboutUs";
 import MainLayout from "./components/layout/MainLayout";
@@ -25,15 +29,32 @@ import BusinessAssistance from "./components/pages/services/BusinessAssistance";
 import MVPDevelopment from "./components/pages/MVPDevelopment";
 import OurWork from "./components/pages/OurWork";
 
+  function GlobalWidgets() {
+  const location = useLocation();
+  const isInternPage = location.pathname.startsWith("/intern-information") || location.pathname.startsWith("/partner-management");
+
+  if (isInternPage) return null;
+
+  return (
+    <>
+      <ProposalSidebar />
+      <ChatWidget />
+    </>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <Toaster position="top-right" />
       <ScrollToTop />
       <ScrollToHash />
-      <ProposalSidebar />
-      <ChatWidget />
+     <GlobalWidgets />
       <Routes>
+        <Route path="/intern-information-creation" element={<ManagerDashboard />} />
+        <Route path="/intern-information-verification" element={<InternDirectory />} />
+        <Route path="/intern-information-verification/:slug" element={<InternVerification />} />
+        <Route path="/partner-management" element={<PartnerManagement />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
