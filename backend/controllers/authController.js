@@ -1,5 +1,5 @@
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import { pool } from "../db/pool.js";
 
 export const managerLogin = async (req, res) => {
   const { password } = req.body;
@@ -8,12 +8,9 @@ export const managerLogin = async (req, res) => {
     return res.status(400).json({ success: false, message: "Password is required." });
   }
 
-  const { rows } = await pool.query(
-    "SELECT (password_hash = crypt($1, password_hash)) AS matches FROM page_access WHERE page_name = $2",
-    [password, "intern-information-creation"],
-  );
+  const inputHash = crypto.createHash("sha256").update(password).digest("hex");
 
-  if (rows.length === 0 || !rows[0].matches) {
+  if (inputHash !== process.env.MANAGER_PASSWORD_HASH) {
     return res.status(401).json({ success: false, message: "Incorrect password." });
   }
 

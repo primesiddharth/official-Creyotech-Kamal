@@ -15,11 +15,8 @@ const FIELD_CONFIG = {
       ["company_name", "Vendor company name"],
       ["brand_name", "Brand name"],
       ["email", "Email"],
-      ["concerned_person_1", "Concerned person 1"],
-      ["phone_number_1", "Phone number 1"],
-      ["concerned_person_2", "Concerned person 2 (optional)"],
-      ["phone_number_2", "Phone number 2 (optional)"],
     ],
+    hasOwnPhone: false,
     itemsKey: "services_offered",
     itemsLabel: "Services offered",
     maxItems: 8,
@@ -27,9 +24,9 @@ const FIELD_CONFIG = {
   freelancer: {
     fields: [
       ["name", "Freelance name"],
-      ["phone_number", "Phone number"],
       ["email", "Email"],
     ],
+    hasOwnPhone: true,
     itemsKey: "services_offered",
     itemsLabel: "Services offered",
     maxItems: 6,
@@ -37,23 +34,54 @@ const FIELD_CONFIG = {
   associate: {
     fields: [
       ["name", "Associate name"],
-      ["phone_number", "Phone number"],
       ["personal_email", "Personal email"],
     ],
+    hasOwnPhone: true,
     itemsKey: "skills",
     itemsLabel: "Skills",
     maxItems: 4,
   },
 };
 
+const ADDRESS_FIELDS = [
+  ["address_line_1", "Address line 1"],
+  ["address_line_2", "Address line 2 (optional)"],
+  ["post_office_name", "Post office"],
+  ["police_station_name", "Police station"],
+  ["city_name", "City"],
+  ["district_name", "District"],
+  ["state_name", "State"],
+  ["postal_code", "Postal code"],
+];
+
+const PhoneInput = ({ value, onChange }) => (
+  <div className="flex">
+    <span className="flex items-center rounded-l-lg border border-r-0 border-border-light bg-bg-soft px-3 text-sm text-muted">
+      +91
+    </span>
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value.replace(/\D/g, "").slice(0, 10))}
+      placeholder="10-digit number"
+      maxLength={10}
+      className="w-full rounded-r-lg border border-border-light px-3 py-2 text-sm focus:border-primary focus:outline-none"
+    />
+  </div>
+);
+
 const PartnerForm = ({ type, onSaved }) => {
   const config = FIELD_CONFIG[type];
-  const [form, setForm] = useState({ address: "" });
+  const [form, setForm] = useState({ country_name: "India" });
+  const [phone, setPhone] = useState("");
+  const [contacts, setContacts] = useState([{ name: "", phone: "" }]);
   const [items, setItems] = useState([""]);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setForm({ address: "" });
+    setForm({ country_name: "India" });
+    setPhone("");
+    setContacts([{ name: "", phone: "" }]);
     setItems([""]);
   }, [type]);
 
@@ -62,20 +90,38 @@ const PartnerForm = ({ type, onSaved }) => {
     updated[index] = value;
     setItems(updated);
   };
-
-  const addItem = () => {
-    if (items.length < config.maxItems) setItems([...items, ""]);
-  };
-
+  const addItem = () => { if (items.length < config.maxItems) setItems([...items, ""]); };
   const removeItem = (index) => setItems(items.filter((_, i) => i !== index));
+
+  const handleContactChange = (index, key, value) => {
+    const updated = [...contacts];
+    updated[index][key] = value;
+    setContacts(updated);
+  };
+  const addContact = () => { if (contacts.length < 2) setContacts([...contacts, { name: "", phone: "" }]); };
+  const removeContact = (index) => setContacts(contacts.filter((_, i) => i !== index));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
     try {
-      await createPartner(type, { ...form, [config.itemsKey]: items });
+      const payload = { ...form, [config.itemsKey]: items };
+
+      if (config.hasOwnPhone) {
+        payload.phone_number = "+91" + phone;
+      }
+
+      if (type === "vendor") {
+        payload.contacts = contacts
+          .filter((c) => c.name && c.phone)
+          .map((c) => ({ name: c.name, phone_number: "+91" + c.phone }));
+      }
+
+      await createPartner(type, payload);
       toast.success("Saved.");
-      setForm({ address: "" });
+      setForm({ country_name: "India" });
+      setPhone("");
+      setContacts([{ name: "", phone: "" }]);
       setItems([""]);
       onSaved();
     } catch (err) {
@@ -86,7 +132,7 @@ const PartnerForm = ({ type, onSaved }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 rounded-2xl border border-border-light bg-white p-6 shadow-soft">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border-light bg-white p-6 shadow-soft">
       <div className="grid grid-cols-2 gap-3">
         {config.fields.map(([key, label]) => (
           <div key={key}>
@@ -95,28 +141,70 @@ const PartnerForm = ({ type, onSaved }) => {
               type="text"
               value={form[key] || ""}
               onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-              required={!label.includes("optional")}
+              required
               className="w-full rounded-lg border border-border-light px-3 py-2 text-sm focus:border-primary focus:outline-none"
             />
           </div>
         ))}
+        {config.hasOwnPhone && (
+          <div>
+            <label className="mb-1 block text-xs text-muted">Phone number</label>
+            <PhoneInput value={phone} onChange={setPhone} />
+          </div>
+        )}
       </div>
 
       <div>
-        <label className="mb-1 block text-xs text-muted">Address</label>
-        <textarea
-          value={form.address}
-          onChange={(e) => setForm({ ...form, address: e.target.value })}
-          required
-          rows={2}
-          className="w-full rounded-lg border border-border-light px-3 py-2 text-sm focus:border-primary focus:outline-none"
-        />
+        <p className="mb-2 text-xs font-medium text-muted">Address</p>
+        <div className="grid grid-cols-2 gap-3">
+          {ADDRESS_FIELDS.map(([key, label]) => (
+            <div key={key}>
+              <label className="mb-1 block text-xs text-muted">{label}</label>
+              <input
+                type="text"
+                value={form[key] || ""}
+                onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                required={!label.includes("optional")}
+                className="w-full rounded-lg border border-border-light px-3 py-2 text-sm focus:border-primary focus:outline-none"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
+      {type === "vendor" && (
+        <div>
+          <label className="mb-1 block text-xs text-muted">Concerned persons (max 2)</label>
+          <div className="space-y-2">
+            {contacts.map((contact, index) => (
+              <div key={index} className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={contact.name}
+                  onChange={(e) => handleContactChange(index, "name", e.target.value)}
+                  className="flex-1 rounded-lg border border-border-light px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                />
+                <div className="flex-1">
+                  <PhoneInput
+                    value={contact.phone}
+                    onChange={(val) => handleContactChange(index, "phone", val)}
+                  />
+                </div>
+                {contacts.length > 1 && (
+                  <button type="button" onClick={() => removeContact(index)} className="text-rose-500">✕</button>
+                )}
+              </div>
+            ))}
+          </div>
+          {contacts.length < 2 && (
+            <button type="button" onClick={addContact} className="mt-2 text-sm text-primary">+ Add second contact</button>
+          )}
+        </div>
+      )}
+
       <div>
-        <label className="mb-1 block text-xs text-muted">
-          {config.itemsLabel} (max {config.maxItems})
-        </label>
+        <label className="mb-1 block text-xs text-muted">{config.itemsLabel} (max {config.maxItems})</label>
         <div className="space-y-2">
           {items.map((item, index) => (
             <div key={index} className="flex gap-2">
@@ -140,11 +228,7 @@ const PartnerForm = ({ type, onSaved }) => {
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={saving}
-        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-      >
+      <button type="submit" disabled={saving} className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
         {saving ? "Saving…" : "Save"}
       </button>
     </form>
@@ -173,7 +257,7 @@ const PartnerList = ({ type, refreshKey }) => {
         <div key={item.id} className="flex items-start justify-between rounded-xl border border-border-light bg-white p-4 shadow-soft">
           <div>
             <p className="text-sm font-semibold text-text-primary">{item[nameField]}</p>
-            <p className="mt-1 text-xs text-muted">{item[config.itemsKey]?.join(", ")}</p>
+            <p className="mt-1 text-xs text-muted">{(item[config.itemsKey] || []).join(", ")}</p>
           </div>
           <button onClick={() => handleDelete(item.id)} className="text-xs font-medium text-rose-600">
             Delete

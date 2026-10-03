@@ -7,11 +7,11 @@ export const fetchAllStudents = async () => {
   return data.data;
 };
 
-export const fetchStudentBySlug = async (slug) => {
-  const response = await fetch(`${API_URL}/students/${slug}`);
+export const fetchStudentBySlug = async (slug, token) => {
+  const response = await fetch(`${API_URL}/students/${slug}?token=${encodeURIComponent(token || "")}`);
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || "Not found.");
   return data.data;
 };
 
-export const imageUrl = (path) => `${API_URL}${path}`;
+export const imageUrl = (path) => (path?.startsWith("http") ? path : `${API_URL}${path}`);

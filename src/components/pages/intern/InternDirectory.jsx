@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { fetchAllStudents, imageUrl } from "../../../services/studentService";
 
 const InternDirectory = () => {
-  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -39,10 +37,9 @@ const InternDirectory = () => {
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((s) => (
-              <button
+              <div
                 key={s.id}
-                onClick={() => navigate(`/intern-information-verification/${s.slug}`)}
-                className="flex items-center gap-3 rounded-xl border border-border-light bg-white p-4 text-left shadow-soft transition hover:border-primary/40"
+                className="flex items-center gap-3 rounded-xl border border-border-light bg-white p-4 shadow-soft"
               >
                 <img
                   src={imageUrl(s.image_path)}
@@ -54,7 +51,7 @@ const InternDirectory = () => {
                   <p className="truncate text-xs text-muted">{s.course_name}</p>
                   <p className="truncate text-xs text-muted">{s.college_name}</p>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         )}
