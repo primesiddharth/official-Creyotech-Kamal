@@ -5,6 +5,7 @@ import { fetchStudentsForManager, deleteStudent, regenerateAccess } from "../../
 import { imageUrl } from "../../../services/studentService";
 import StatusPill from "./StatusPill";
 import StudentFormModal from "./StudentFormModal";
+import ManagerNav from "./ManagerNav";
 
 const LinkPopup = ({ link, onClose }) => {
   const fullUrl = `${window.location.origin}${link}`;
@@ -111,6 +112,7 @@ const ManagerDashboard = () => {
   return (
     <div className="min-h-screen bg-bg-soft px-4 py-12">
       <div className="mx-auto max-w-6xl">
+        <ManagerNav />
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-text-primary">Intern records</h1>
