@@ -19,7 +19,7 @@ export const managerLogin = async (req, res) => {
   res.cookie("manager_token", token, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 12 * 60 * 60 * 1000,
   });
 

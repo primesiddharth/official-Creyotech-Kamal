@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { managerLogin } from "../../../services/authService";
 import { fetchPartners, createPartner, deletePartner } from "../../../services/partnerService";
+import ManagerNav from "./ManagerNav";
 
 const TABS = [
   { key: "vendor", label: "Vendor" },
@@ -318,6 +319,7 @@ const PartnerManagement = () => {
   return (
     <div className="min-h-screen bg-bg-soft px-4 py-12">
       <div className="mx-auto max-w-3xl">
+        <ManagerNav />
         <h1 className="text-2xl font-semibold text-text-primary">Partner management</h1>
         <p className="mt-1 text-sm text-muted">Are you adding a Vendor, Freelance, or Associate?</p>
 
