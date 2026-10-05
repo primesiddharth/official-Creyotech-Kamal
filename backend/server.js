@@ -21,14 +21,25 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+const allowedOrigins = [
+  "https://official-creyotech-kamal-gamma.vercel.app",
+  process.env.FRONTEND_URL,
+];
+
 app.use(
   cors({
-    origin: ["https://official-creyotech-kamal-gamma.vercel.app", process.env.FRONTEND_URL],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+      callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
 );
-app.use("/partners", partnerRoutes);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -94,8 +105,9 @@ app.use("/career", careerRoutes);
 app.use("/auth", authRoutes);
 app.use("/students", studentRoutes);
 app.use("/manager", managerRoutes);
+app.use("/partners", partnerRoutes);
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error("Server Error:", err);
 
   if (err.code === "LIMIT_FILE_SIZE") {
